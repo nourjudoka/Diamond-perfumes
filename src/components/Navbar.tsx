@@ -4,9 +4,7 @@ import { Search, ShoppingBag, Menu, X } from 'lucide-react';
 import { useStore } from '@/lib/store';
 import { CartDrawer } from './CartDrawer';
 import logo from '@/assets/logo.png';
-
-const uploadedLogo =
-  '/@fs/C:/Users/nours/OneDrive/Desktop/PERFUMEWEBITE/diamond-scent-studio-main/DIAMOND%20LOGO%20%281%29.png';
+import brandLogo from '../../DIAMOND LOGO (1).png';
 
 const navLinks = [
   { label: 'Shop All', to: '/shop' },
@@ -34,7 +32,7 @@ export function Navbar() {
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2">
               <img
-                src={uploadedLogo}
+                src={brandLogo}
                 alt="Diamond Perfume"
                 onError={(e) => {
                   e.currentTarget.src = logo;
