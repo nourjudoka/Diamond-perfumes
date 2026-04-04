@@ -7,22 +7,44 @@ import { Diamond, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 
 export default function AuthPage() {
-  const [email, setEmail] = useState('');
+  const [identifier, setIdentifier] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const ADMIN_SERVICE_EMAIL = import.meta.env.VITE_ADMIN_SERVICE_EMAIL || 'super_admin@diamondscent.com';
+  const ADMIN_SERVICE_PASSWORD = import.meta.env.VITE_ADMIN_SERVICE_PASSWORD || 'AdminPassword2026!';
+
+  const resolveIdentifier = (value: string) => {
+    const normalized = value.trim().toLowerCase();
+    if (!normalized) return '';
+    return normalized.includes('@') ? normalized.split('@')[0] : normalized;
+  };
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !password) {
-      toast.error('Please enter both email and password');
+    if (!identifier || !password) {
+      toast.error('Please enter username/email and password');
       return;
     }
     
     setLoading(true);
+    const username = resolveIdentifier(identifier);
+
+    const { data: adminMatch, error: adminError } = await supabase.rpc('authenticate_admin', {
+      p_identifier: username,
+      p_password: password,
+    });
+
+    if (adminError || !adminMatch || adminMatch.length === 0) {
+      toast.error('Invalid username or password');
+      setLoading(false);
+      return;
+    }
+
+    // Open a valid Supabase session for admin panel data access.
     const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
+      email: ADMIN_SERVICE_EMAIL,
+      password: ADMIN_SERVICE_PASSWORD,
     });
     
     if (error) {
@@ -49,13 +71,13 @@ export default function AuthPage() {
 
           <form className="space-y-4" onSubmit={handleLogin}>
             <div>
-              <label className="text-[10px] uppercase tracking-[0.2em] font-sans font-medium block mb-1.5">Email</label>
+              <label className="text-[10px] uppercase tracking-[0.2em] font-sans font-medium block mb-1.5">Email or Username</label>
               <input 
-                type="email" 
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                type="text" 
+                value={identifier}
+                onChange={(e) => setIdentifier(e.target.value)}
                 className="w-full border border-border px-4 py-3 text-sm font-sans focus:outline-none focus:border-foreground transition-colors bg-background" 
-                placeholder="your@email.com" 
+                placeholder="Enter your username or email" 
                 disabled={loading}
               />
             </div>
