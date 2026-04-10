@@ -10,6 +10,7 @@ interface SizeEntry { label: string; price: string; }
 const EMPTY_FORM = {
   name: '', brand: '', stock: '', description: '',
   gender: 'Unisex', scentFamily: 'Woody', discount: '0', image: '',
+  productType: 'Master Box',
 };
 
 const EMPTY_SIZE: SizeEntry = { label: '', price: '' };
@@ -79,6 +80,7 @@ export default function AdminProducts() {
       name: p.name, brand: p.brand, stock: String(p.stock ?? ''),
       description: p.description ?? '', gender: p.gender ?? 'Unisex',
       scentFamily: p.scent_family ?? 'Woody', discount: String(p.discount_percent ?? 0), image: p.image ?? '',
+      productType: (p as unknown as { product_type: string }).product_type ?? 'Master Box',
     });
     const existingSizes = Array.isArray(p.sizes)
       ? (p.sizes as { label: string; price: number }[]).map(s => ({ label: s.label, price: String(s.price) }))
@@ -118,6 +120,7 @@ export default function AdminProducts() {
         description: form.description,
         stock: Number(form.stock),
         discount_percent: Number(form.discount),
+        product_type: form.productType,
       };
 
       if (editId) {
@@ -155,7 +158,7 @@ export default function AdminProducts() {
         <table className="w-full">
           <thead>
             <tr className="border-b border-border">
-              {['Product', 'Brand', 'Gender', 'Sizes', 'From Price', 'Discount', 'Stock', ''].map((h) => (
+              {['Product', 'Brand', 'Type', 'Gender', 'Sizes', 'From Price', 'Discount', 'Stock', ''].map((h) => (
                 <th key={h} className="text-left px-6 py-3 text-[10px] uppercase tracking-[0.2em] font-sans font-medium text-muted-foreground">{h}</th>
               ))}
             </tr>
@@ -168,6 +171,19 @@ export default function AdminProducts() {
                 <tr key={p.id} className="border-b border-border last:border-0 hover:bg-secondary/50 transition-colors">
                   <td className="px-6 py-4 text-sm font-sans font-medium">{p.name}</td>
                   <td className="px-6 py-4 text-sm font-sans text-muted-foreground">{p.brand}</td>
+                  <td className="px-6 py-4">
+                    <select
+                      value={(p as unknown as { product_type: string }).product_type ?? 'Master Box'}
+                      onChange={(e) => updateProduct.mutate({ id: p.id, updates: { product_type: e.target.value } })}
+                      className={`text-[10px] font-sans px-2 py-1 border focus:outline-none cursor-pointer ${
+                        (p as unknown as { product_type: string }).product_type === 'Tester'
+                          ? 'bg-amber-900/30 text-amber-400 border-amber-800'
+                          : 'bg-green-900/30 text-green-400 border-green-800'
+                      }`}>
+                      <option value="Master Box" className="bg-background text-foreground">Master Box</option>
+                      <option value="Tester" className="bg-background text-foreground">Tester</option>
+                    </select>
+                  </td>
                   <td className="px-6 py-4 text-xs font-sans">{p.gender}</td>
                   <td className="px-6 py-4">
                     <div className="flex flex-wrap gap-1">
@@ -246,12 +262,19 @@ export default function AdminProducts() {
                 </select>
               </div>
               <div>
-                <label className="text-[10px] uppercase tracking-[0.2em] font-sans font-medium block mb-1.5">Scent Family</label>
-                <select value={form.scentFamily} onChange={(e) => setForm({ ...form, scentFamily: e.target.value })}
+                <label className="text-[10px] uppercase tracking-[0.2em] font-sans font-medium block mb-1.5">Product Type</label>
+                <select value={form.productType} onChange={(e) => setForm({ ...form, productType: e.target.value })}
                   className="w-full border border-border px-4 py-3 text-sm font-sans focus:outline-none focus:border-foreground bg-background">
-                  <option>Woody</option><option>Floral</option><option>Citrus</option><option>Oriental</option><option>Fresh</option>
+                  <option>Master Box</option><option>Tester</option>
                 </select>
               </div>
+            </div>
+            <div>
+              <label className="text-[10px] uppercase tracking-[0.2em] font-sans font-medium block mb-1.5">Scent Family</label>
+              <select value={form.scentFamily} onChange={(e) => setForm({ ...form, scentFamily: e.target.value })}
+                className="w-full border border-border px-4 py-3 text-sm font-sans focus:outline-none focus:border-foreground bg-background">
+                <option>Woody</option><option>Floral</option><option>Citrus</option><option>Oriental</option><option>Fresh</option>
+              </select>
             </div>
 
             <div>

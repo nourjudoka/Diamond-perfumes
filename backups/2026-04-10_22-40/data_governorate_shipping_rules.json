@@ -1,0 +1,218 @@
+[
+  {
+    "governorate": "Red Sea",
+    "is_free": false,
+    "shipping_fee": 15,
+    "created_at": "2026-04-02T09:18:40.200327+00:00",
+    "updated_at": "2026-04-02T09:27:09.234+00:00",
+    "arrival_eta": "3-5 business days"
+  },
+  {
+    "governorate": "Beheira",
+    "is_free": false,
+    "shipping_fee": 15,
+    "created_at": "2026-04-02T09:18:40.200327+00:00",
+    "updated_at": "2026-04-02T09:27:09.234+00:00",
+    "arrival_eta": "3-5 business days"
+  },
+  {
+    "governorate": "Fayoum",
+    "is_free": false,
+    "shipping_fee": 15,
+    "created_at": "2026-04-02T09:18:40.200327+00:00",
+    "updated_at": "2026-04-02T09:27:09.234+00:00",
+    "arrival_eta": "3-5 business days"
+  },
+  {
+    "governorate": "Gharbia",
+    "is_free": false,
+    "shipping_fee": 15,
+    "created_at": "2026-04-02T09:18:40.200327+00:00",
+    "updated_at": "2026-04-02T09:27:09.234+00:00",
+    "arrival_eta": "3-5 business days"
+  },
+  {
+    "governorate": "Ismailia",
+    "is_free": false,
+    "shipping_fee": 15,
+    "created_at": "2026-04-02T09:18:40.200327+00:00",
+    "updated_at": "2026-04-02T09:27:09.234+00:00",
+    "arrival_eta": "3-5 business days"
+  },
+  {
+    "governorate": "Menofia",
+    "is_free": false,
+    "shipping_fee": 15,
+    "created_at": "2026-04-02T09:18:40.200327+00:00",
+    "updated_at": "2026-04-02T09:27:09.234+00:00",
+    "arrival_eta": "3-5 business days"
+  },
+  {
+    "governorate": "Minya",
+    "is_free": false,
+    "shipping_fee": 15,
+    "created_at": "2026-04-02T09:18:40.200327+00:00",
+    "updated_at": "2026-04-02T09:27:09.234+00:00",
+    "arrival_eta": "3-5 business days"
+  },
+  {
+    "governorate": "Qaliubiya",
+    "is_free": false,
+    "shipping_fee": 15,
+    "created_at": "2026-04-02T09:18:40.200327+00:00",
+    "updated_at": "2026-04-02T09:27:09.234+00:00",
+    "arrival_eta": "3-5 business days"
+  },
+  {
+    "governorate": "New Valley",
+    "is_free": false,
+    "shipping_fee": 15,
+    "created_at": "2026-04-02T09:18:40.200327+00:00",
+    "updated_at": "2026-04-02T09:27:09.234+00:00",
+    "arrival_eta": "3-5 business days"
+  },
+  {
+    "governorate": "Suez",
+    "is_free": false,
+    "shipping_fee": 15,
+    "created_at": "2026-04-02T09:18:40.200327+00:00",
+    "updated_at": "2026-04-02T09:27:09.234+00:00",
+    "arrival_eta": "3-5 business days"
+  },
+  {
+    "governorate": "Aswan",
+    "is_free": false,
+    "shipping_fee": 15,
+    "created_at": "2026-04-02T09:18:40.200327+00:00",
+    "updated_at": "2026-04-02T09:27:09.234+00:00",
+    "arrival_eta": "3-5 business days"
+  },
+  {
+    "governorate": "Assiut",
+    "is_free": false,
+    "shipping_fee": 15,
+    "created_at": "2026-04-02T09:18:40.200327+00:00",
+    "updated_at": "2026-04-02T09:27:09.234+00:00",
+    "arrival_eta": "3-5 business days"
+  },
+  {
+    "governorate": "Beni Suef",
+    "is_free": false,
+    "shipping_fee": 15,
+    "created_at": "2026-04-02T09:18:40.200327+00:00",
+    "updated_at": "2026-04-02T09:27:09.234+00:00",
+    "arrival_eta": "3-5 business days"
+  },
+  {
+    "governorate": "Port Said",
+    "is_free": false,
+    "shipping_fee": 15,
+    "created_at": "2026-04-02T09:18:40.200327+00:00",
+    "updated_at": "2026-04-02T09:27:09.234+00:00",
+    "arrival_eta": "3-5 business days"
+  },
+  {
+    "governorate": "Damietta",
+    "is_free": false,
+    "shipping_fee": 15,
+    "created_at": "2026-04-02T09:18:40.200327+00:00",
+    "updated_at": "2026-04-02T09:27:09.234+00:00",
+    "arrival_eta": "3-5 business days"
+  },
+  {
+    "governorate": "Sharkia",
+    "is_free": false,
+    "shipping_fee": 15,
+    "created_at": "2026-04-02T09:18:40.200327+00:00",
+    "updated_at": "2026-04-02T09:27:09.234+00:00",
+    "arrival_eta": "3-5 business days"
+  },
+  {
+    "governorate": "South Sinai",
+    "is_free": false,
+    "shipping_fee": 15,
+    "created_at": "2026-04-02T09:18:40.200327+00:00",
+    "updated_at": "2026-04-02T09:27:09.234+00:00",
+    "arrival_eta": "3-5 business days"
+  },
+  {
+    "governorate": "Kafr El Sheikh",
+    "is_free": false,
+    "shipping_fee": 15,
+    "created_at": "2026-04-02T09:18:40.200327+00:00",
+    "updated_at": "2026-04-02T09:27:09.234+00:00",
+    "arrival_eta": "3-5 business days"
+  },
+  {
+    "governorate": "Matrouh",
+    "is_free": false,
+    "shipping_fee": 15,
+    "created_at": "2026-04-02T09:18:40.200327+00:00",
+    "updated_at": "2026-04-02T09:27:09.234+00:00",
+    "arrival_eta": "3-5 business days"
+  },
+  {
+    "governorate": "Luxor",
+    "is_free": false,
+    "shipping_fee": 15,
+    "created_at": "2026-04-02T09:18:40.200327+00:00",
+    "updated_at": "2026-04-02T09:27:09.234+00:00",
+    "arrival_eta": "3-5 business days"
+  },
+  {
+    "governorate": "Qena",
+    "is_free": false,
+    "shipping_fee": 15,
+    "created_at": "2026-04-02T09:18:40.200327+00:00",
+    "updated_at": "2026-04-02T09:27:09.234+00:00",
+    "arrival_eta": "3-5 business days"
+  },
+  {
+    "governorate": "North Sinai",
+    "is_free": false,
+    "shipping_fee": 15,
+    "created_at": "2026-04-02T09:18:40.200327+00:00",
+    "updated_at": "2026-04-02T09:27:09.234+00:00",
+    "arrival_eta": "3-5 business days"
+  },
+  {
+    "governorate": "Sohag",
+    "is_free": false,
+    "shipping_fee": 15,
+    "created_at": "2026-04-02T09:18:40.200327+00:00",
+    "updated_at": "2026-04-02T09:27:09.234+00:00",
+    "arrival_eta": "3-5 business days"
+  },
+  {
+    "governorate": "Cairo",
+    "is_free": true,
+    "shipping_fee": 0,
+    "created_at": "2026-04-02T09:18:40.200327+00:00",
+    "updated_at": "2026-04-02T09:27:09.234+00:00",
+    "arrival_eta": "3-5 business days"
+  },
+  {
+    "governorate": "Giza",
+    "is_free": false,
+    "shipping_fee": 500,
+    "created_at": "2026-04-02T09:18:40.200327+00:00",
+    "updated_at": "2026-04-02T09:27:09.234+00:00",
+    "arrival_eta": "3-8business days"
+  },
+  {
+    "governorate": "Alexandria",
+    "is_free": false,
+    "shipping_fee": 15,
+    "created_at": "2026-04-02T09:18:40.200327+00:00",
+    "updated_at": "2026-04-02T09:27:09.234+00:00",
+    "arrival_eta": "3-5 business days"
+  },
+  {
+    "governorate": "Dakahlia",
+    "is_free": false,
+    "shipping_fee": 15,
+    "created_at": "2026-04-02T09:18:40.200327+00:00",
+    "updated_at": "2026-04-02T09:27:09.234+00:00",
+    "arrival_eta": "3-5 business days"
+  }
+]

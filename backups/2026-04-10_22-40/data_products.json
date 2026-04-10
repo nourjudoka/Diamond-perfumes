@@ -1,0 +1,901 @@
+[
+  {
+    "id": "7c47e1fa-b239-4c7a-afab-2cda91335cae",
+    "name": "Tom Ford Lost Cherry - 100ML",
+    "brand": "Tom Ford",
+    "price": 1500,
+    "stock": 9,
+    "description": "Lost Cherry mingles black cherry with cherry liqueur accords and a touch of bitter almond, bursting forth in waves of sweet and tart. Opulent floral notes of rose and jasmine sambac blend with an unexpected mélange of sandalwood, vetiver, and cedarwood.",
+    "gender": "Unisex",
+    "scent_family": "Floral",
+    "sizes": [
+      {
+        "label": "100 ML",
+        "price": 1500
+      }
+    ],
+    "notes": {
+      "top": [
+        "—"
+      ],
+      "base": [
+        "—"
+      ],
+      "heart": [
+        "—"
+      ]
+    },
+    "image": "https://cfpiizuovdhbbgkugxyy.supabase.co/storage/v1/object/public/product-images/0.8654408854096847.png",
+    "discount_percent": 0,
+    "created_at": "2026-04-09T14:14:45.201158+00:00",
+    "updated_at": "2026-04-10T20:10:01.664214+00:00"
+  },
+  {
+    "id": "fd3573cc-d30e-4c24-8d24-42c3d77b5138",
+    "name": "Tom Ford Black Orchid - 100ML",
+    "brand": "Tom Ford",
+    "price": 1300,
+    "stock": 10,
+    "description": "Black Orchid Eau de Parfum opens with aphrodisiac black truffle and sparkling ylang ylang—touched with effervescent bergamot and bitter orange. Rum-soaked black plum surrounds the black orchid accord in golden sensuality, while woody patchouli and creamy vanilla wrap the orchid in rich warmth.\n\n",
+    "gender": "Unisex",
+    "scent_family": "Floral",
+    "sizes": [
+      {
+        "label": "100 ML",
+        "price": 1300
+      }
+    ],
+    "notes": {
+      "top": [
+        "—"
+      ],
+      "base": [
+        "—"
+      ],
+      "heart": [
+        "—"
+      ]
+    },
+    "image": "https://cfpiizuovdhbbgkugxyy.supabase.co/storage/v1/object/public/product-images/0.7660956467889553.png",
+    "discount_percent": 0,
+    "created_at": "2026-04-08T19:46:59.78932+00:00",
+    "updated_at": "2026-04-08T19:46:59.78932+00:00"
+  },
+  {
+    "id": "681755dd-952c-4675-a869-1c8edc2b2608",
+    "name": "Tom Ford Orchid Soleil - 100ML",
+    "brand": "Tom Ford",
+    "price": 1300,
+    "stock": 10,
+    "description": "Orchid Soleil by Tom Ford is a Amber Floral fragrance for women.\n\nOrchid Soleil is a vibrant, radiant and sensual scent that is said to capture the magic of the most brilliant sunshine. The composition opens with spicy notes of pink pepper, bitter orange and cypress. Its vibrant heart blooms with red spider lily and tuberose, enveloped by the warm base of chestnut cream, vanilla, patchouli and orchid.\n",
+    "gender": "Women",
+    "scent_family": "Floral",
+    "sizes": [
+      {
+        "label": "100ML",
+        "price": 1300
+      }
+    ],
+    "notes": {
+      "top": [
+        "—"
+      ],
+      "base": [
+        "—"
+      ],
+      "heart": [
+        "—"
+      ]
+    },
+    "image": "https://cfpiizuovdhbbgkugxyy.supabase.co/storage/v1/object/public/product-images/0.652893370923287.png",
+    "discount_percent": 0,
+    "created_at": "2026-04-08T18:06:05.306745+00:00",
+    "updated_at": "2026-04-08T18:06:05.306745+00:00"
+  },
+  {
+    "id": "28b5a139-46f1-4485-8c1d-a8299ea371d9",
+    "name": "Tom Ford Black Orchid - 100ML",
+    "brand": "Tom Ford",
+    "price": 1300,
+    "stock": 10,
+    "description": "Black Orchid Eau de Parfum opens with aphrodisiac black truffle and sparkling ylang ylang—touched with effervescent bergamot and bitter orange. Rum-soaked black plum surrounds the black orchid accord in golden sensuality, while woody patchouli and creamy vanilla wrap the orchid in rich warmth.",
+    "gender": "Unisex",
+    "scent_family": "Floral",
+    "sizes": [
+      {
+        "label": "100 ML",
+        "price": 1300
+      }
+    ],
+    "notes": {
+      "top": [
+        "—"
+      ],
+      "base": [
+        "—"
+      ],
+      "heart": [
+        "—"
+      ]
+    },
+    "image": "https://cfpiizuovdhbbgkugxyy.supabase.co/storage/v1/object/public/product-images/0.2153814728136022.png",
+    "discount_percent": 0,
+    "created_at": "2026-04-08T18:12:29.790566+00:00",
+    "updated_at": "2026-04-08T18:12:29.790566+00:00"
+  },
+  {
+    "id": "5a178b9e-4314-49f1-ad83-70c91259460b",
+    "name": "Tom Ford Grey Vetiver - 100ML",
+    "brand": "Tom Ford",
+    "price": 1300,
+    "stock": 10,
+    "description": "Velvet Orchid lives in Black Orchid’s world of glamorous mystique, while exuding its own ultra-feminine essence. Lavished with shimmering freshness, honey, rum and a dramatic floral veil, a new character emerges: one that pulls, rather than pushes; elegantly refined and polished.",
+    "gender": "Men",
+    "scent_family": "Woody",
+    "sizes": [
+      {
+        "label": "100 ML",
+        "price": 1300
+      }
+    ],
+    "notes": {
+      "top": [
+        "—"
+      ],
+      "base": [
+        "—"
+      ],
+      "heart": [
+        "—"
+      ]
+    },
+    "image": "https://cfpiizuovdhbbgkugxyy.supabase.co/storage/v1/object/public/product-images/0.12210910801620756.png",
+    "discount_percent": 0,
+    "created_at": "2026-04-08T18:21:26.405115+00:00",
+    "updated_at": "2026-04-08T18:21:26.405115+00:00"
+  },
+  {
+    "id": "bcbd27d0-fefd-467b-b3c3-43977ab21eb2",
+    "name": "Tom Ford Vanilla Sex - 100ML",
+    "brand": "Tom Ford",
+    "price": 1500,
+    "stock": 10,
+    "description": "Anything but ordinary—and far from innocent. A captivating interplay of deep and bright vanilla notes star in VANILLA SEX. Addictive by nature, glamorous by design, the amber fragrance features a Vanilla Tincture India note designed specifically for TOM FORD.\n\nWinner of Fragrance of the Year Universal Luxury - Fragrance Foundation Awards.",
+    "gender": "Unisex",
+    "scent_family": "Oriental",
+    "sizes": [
+      {
+        "label": "100 ML",
+        "price": 1500
+      }
+    ],
+    "notes": {
+      "top": [
+        "—"
+      ],
+      "base": [
+        "—"
+      ],
+      "heart": [
+        "—"
+      ]
+    },
+    "image": "https://cfpiizuovdhbbgkugxyy.supabase.co/storage/v1/object/public/product-images/0.31288532986721507.png",
+    "discount_percent": 0,
+    "created_at": "2026-04-09T13:08:06.674443+00:00",
+    "updated_at": "2026-04-09T13:08:06.674443+00:00"
+  },
+  {
+    "id": "261655a7-8b2a-4062-88c7-6ec69c4637d7",
+    "name": "Tom Ford Bitter Peach - 100ML",
+    "brand": "Tom Ford",
+    "price": 1500,
+    "stock": 10,
+    "description": "Notes of pêche de vigne and blood orange oil release the slick sweetness of Bitter Peach at its luscious peak. A sensual heart is revealed through rum-infused davana oil, while a surge of patchouli lures senses to the furthest reaches of inner sensuality and abandon.",
+    "gender": "Unisex",
+    "scent_family": "Oriental",
+    "sizes": [
+      {
+        "label": "100 ML",
+        "price": 1500
+      }
+    ],
+    "notes": {
+      "top": [
+        "—"
+      ],
+      "base": [
+        "—"
+      ],
+      "heart": [
+        "—"
+      ]
+    },
+    "image": "https://cfpiizuovdhbbgkugxyy.supabase.co/storage/v1/object/public/product-images/0.048487841878500526.png",
+    "discount_percent": 0,
+    "created_at": "2026-04-09T13:52:34.494738+00:00",
+    "updated_at": "2026-04-09T13:52:34.494738+00:00"
+  },
+  {
+    "id": "d38d8b50-3d9b-43ec-a6e5-755e04e4a799",
+    "name": "Tom Ford Vanille Fatale - 100ML",
+    "brand": "Tom Ford",
+    "price": 1500,
+    "stock": 10,
+    "description": "Vanille Fatale (2024) by Tom Ford is a fragrance for women and men. Vanille Fatale (2024) was launched in 2024. Top notes are Saffron and Coriander; middle notes are Coffee, Frangipani, Barley and Narcissus; base notes are Madagascar Vanilla, Tobacco, Suede and Mahogany.\n\n",
+    "gender": "Unisex",
+    "scent_family": "Woody",
+    "sizes": [
+      {
+        "label": "100 ML",
+        "price": 1500
+      }
+    ],
+    "notes": {
+      "top": [
+        "—"
+      ],
+      "base": [
+        "—"
+      ],
+      "heart": [
+        "—"
+      ]
+    },
+    "image": "https://cfpiizuovdhbbgkugxyy.supabase.co/storage/v1/object/public/product-images/0.24300031650516674.png",
+    "discount_percent": 0,
+    "created_at": "2026-04-09T14:10:23.587866+00:00",
+    "updated_at": "2026-04-09T14:10:23.587866+00:00"
+  },
+  {
+    "id": "c8e2f814-6d11-4718-9428-f32f7dab219b",
+    "name": "Tom Ford Tobacco Vanille - 100ML",
+    "brand": "Tom Ford",
+    "price": 1500,
+    "stock": 10,
+    "description": "Tobacco Vanille is reminiscent of the very finest of private clubs – a classic fragrance infused with tonka bean, vanilla, cocoa, dry fruit accords and notes of sweet wood sap for a modern, opulent and heady impression.\n\n",
+    "gender": "Unisex",
+    "scent_family": "Oriental",
+    "sizes": [
+      {
+        "label": "100 ML",
+        "price": 1500
+      }
+    ],
+    "notes": {
+      "top": [
+        "—"
+      ],
+      "base": [
+        "—"
+      ],
+      "heart": [
+        "—"
+      ]
+    },
+    "image": "https://cfpiizuovdhbbgkugxyy.supabase.co/storage/v1/object/public/product-images/0.4955862051554314.png",
+    "discount_percent": 0,
+    "created_at": "2026-04-09T14:23:26.486836+00:00",
+    "updated_at": "2026-04-09T14:23:26.486836+00:00"
+  },
+  {
+    "id": "6e883a5b-33d7-4210-8bb8-57730d4e0aef",
+    "name": "Tom Ford Tobacco Oud - 100ML ",
+    "brand": "Tom Ford",
+    "price": 1500,
+    "stock": 10,
+    "description": "With Oud Wood, TOM FORD uses rare oud notes to overwhelm the senses with dark, earthy sensuality. Exotic rosewood and cardamom give way to a smoky blend of precious oud notes, sandalwood and vetiver. Tonka bean and amber add warmth and sensuality.",
+    "gender": "Unisex",
+    "scent_family": "Woody",
+    "sizes": [
+      {
+        "label": "100 ML",
+        "price": 1500
+      }
+    ],
+    "notes": {
+      "top": [
+        "—"
+      ],
+      "base": [
+        "—"
+      ],
+      "heart": [
+        "—"
+      ]
+    },
+    "image": "https://cfpiizuovdhbbgkugxyy.supabase.co/storage/v1/object/public/product-images/0.43544963965934047.png",
+    "discount_percent": 0,
+    "created_at": "2026-04-09T14:28:50.725522+00:00",
+    "updated_at": "2026-04-09T14:28:50.725522+00:00"
+  },
+  {
+    "id": "65bde2f3-aa5c-4f3b-b300-808b598ace55",
+    "name": "Tom Ford Oud Wood - 100ML",
+    "brand": "Tom Ford",
+    "price": 1500,
+    "stock": 10,
+    "description": "With Oud Wood, TOM FORD uses rare oud notes to overwhelm the senses with dark, earthy sensuality. Exotic rosewood and cardamom give way to a smoky blend of precious oud notes, sandalwood and vetiver. Tonka bean and amber add warmth and sensuality.\n",
+    "gender": "Unisex",
+    "scent_family": "Oriental",
+    "sizes": [
+      {
+        "label": "100 ML",
+        "price": 1500
+      }
+    ],
+    "notes": {
+      "top": [
+        "—"
+      ],
+      "base": [
+        "—"
+      ],
+      "heart": [
+        "—"
+      ]
+    },
+    "image": "https://cfpiizuovdhbbgkugxyy.supabase.co/storage/v1/object/public/product-images/0.9375876195756362.png",
+    "discount_percent": 0,
+    "created_at": "2026-04-09T14:31:20.538731+00:00",
+    "updated_at": "2026-04-09T14:31:20.538731+00:00"
+  },
+  {
+    "id": "66111f20-5ccc-473c-9ffd-c92d6d4b3fd7",
+    "name": "Tom Ford Tuscan Leather - 100ML",
+    "brand": "Tom Ford",
+    "price": 1500,
+    "stock": 10,
+    "description": "Tuscan Leather merges primal leather with night-blooming jasmine and black suede for a distinctive spin: a perfume that is raw yet refined, sensual yet sophisticated.",
+    "gender": "Unisex",
+    "scent_family": "Woody",
+    "sizes": [
+      {
+        "label": "100 ML",
+        "price": 1500
+      }
+    ],
+    "notes": {
+      "top": [
+        "—"
+      ],
+      "base": [
+        "—"
+      ],
+      "heart": [
+        "—"
+      ]
+    },
+    "image": "https://cfpiizuovdhbbgkugxyy.supabase.co/storage/v1/object/public/product-images/0.5488139185958146.png",
+    "discount_percent": 0,
+    "created_at": "2026-04-09T14:36:07.543457+00:00",
+    "updated_at": "2026-04-09T14:36:07.543457+00:00"
+  },
+  {
+    "id": "99b67a42-9dc0-473e-a0e9-d13dff1f24ba",
+    "name": "Tom Ford Noir De Noir - 100ML",
+    "brand": "Tom Ford",
+    "price": 1500,
+    "stock": 10,
+    "description": "Noir de Noir is TOM FORD‘s compellingly dark portrait of feminine-masculine duality where rich, feminine florals collide with the masculine earthiness of black truffle, vanilla, patchouli, and oud wood. The warm and sensual gourmand fragrance is the essence of yin‘s dance with yang.\n\n",
+    "gender": "Men",
+    "scent_family": "Woody",
+    "sizes": [
+      {
+        "label": "100 ML",
+        "price": 1500
+      }
+    ],
+    "notes": {
+      "top": [
+        "—"
+      ],
+      "base": [
+        "—"
+      ],
+      "heart": [
+        "—"
+      ]
+    },
+    "image": "https://cfpiizuovdhbbgkugxyy.supabase.co/storage/v1/object/public/product-images/0.2468693425256996.png",
+    "discount_percent": 0,
+    "created_at": "2026-04-09T14:33:44.993418+00:00",
+    "updated_at": "2026-04-09T14:33:44.993418+00:00"
+  },
+  {
+    "id": "688892d9-ef56-4248-b6e0-73ed4d033570",
+    "name": "Tom Ford Ombre Leather - 100ML",
+    "brand": "Tom Ford",
+    "price": 1500,
+    "stock": 10,
+    "description": "Dust on wind, skin on skin, the Ombré Leather fragrance evokes the desert heart of the west. The sensuality of rich black leather is texturized with patchouli and vetiver, while floral tones of jasmine sambac conjure wild desert beauty – and layers of amber and moss mimic the heat of rock and sand.\n",
+    "gender": "Unisex",
+    "scent_family": "Woody",
+    "sizes": [
+      {
+        "label": "100 ML",
+        "price": 1500
+      }
+    ],
+    "notes": {
+      "top": [
+        "—"
+      ],
+      "base": [
+        "—"
+      ],
+      "heart": [
+        "—"
+      ]
+    },
+    "image": "https://cfpiizuovdhbbgkugxyy.supabase.co/storage/v1/object/public/product-images/0.6730799702251294.png",
+    "discount_percent": 0,
+    "created_at": "2026-04-09T14:42:12.024045+00:00",
+    "updated_at": "2026-04-09T14:42:12.024045+00:00"
+  },
+  {
+    "id": "f3172ba2-d1e2-4f9e-8a6d-723dbba8288a",
+    "name": "Tom Ford Noir Extreme - 100 ML",
+    "brand": "Tom Ford",
+    "price": 1400,
+    "stock": 10,
+    "description": "A rich blend of warm spices and glowing citrus gives way to the scent of tantalizing kulfi and an array of floral notes – rose absolute accord, jasmine accord and orange flower. A woody, amber-drenched impact defines the finish, where a powerful amber dosage is studded with sandalwood and molten vanilla embers.",
+    "gender": "Men",
+    "scent_family": "Oriental",
+    "sizes": [
+      {
+        "label": "100 ML",
+        "price": 1400
+      }
+    ],
+    "notes": {
+      "top": [
+        "—"
+      ],
+      "base": [
+        "—"
+      ],
+      "heart": [
+        "—"
+      ]
+    },
+    "image": "https://cfpiizuovdhbbgkugxyy.supabase.co/storage/v1/object/public/product-images/0.030223071810748903.png",
+    "discount_percent": 0,
+    "created_at": "2026-04-09T14:56:29.568247+00:00",
+    "updated_at": "2026-04-09T14:56:29.568247+00:00"
+  },
+  {
+    "id": "55f5472a-fd75-40d2-8e11-7533264e0b3f",
+    "name": "Tom Ford Noir Extreme - 100 ML",
+    "brand": "Tom Ford",
+    "price": 1400,
+    "stock": 10,
+    "description": "Noir Extreme Parfum breathes a heightened concentration of spicy cardamom, spiked with the warmth of shimoga ginger and the rich sensuality of tonka bean and guaiacwood.",
+    "gender": "Men",
+    "scent_family": "Woody",
+    "sizes": [
+      {
+        "label": "100 ML",
+        "price": 1400
+      }
+    ],
+    "notes": {
+      "top": [
+        "—"
+      ],
+      "base": [
+        "—"
+      ],
+      "heart": [
+        "—"
+      ]
+    },
+    "image": "https://cfpiizuovdhbbgkugxyy.supabase.co/storage/v1/object/public/product-images/0.5882391094231324.png",
+    "discount_percent": 0,
+    "created_at": "2026-04-09T15:00:43.633399+00:00",
+    "updated_at": "2026-04-09T15:00:43.633399+00:00"
+  },
+  {
+    "id": "645c903b-05d3-4df4-b06e-edc8eec054a1",
+    "name": "Jean Paul Gaultier Le Male Elixir - 125ML",
+    "brand": "Jean Paul Gaultier",
+    "price": 1500,
+    "stock": 10,
+    "description": "This intense parfum takes masculinity to new heights, dressing the iconic torso in a stylish brown-striped sailor outfit and a radiating gold bottle that embodies pure temptation and confidence. \n",
+    "gender": "Unisex",
+    "scent_family": "Oriental",
+    "sizes": [
+      {
+        "label": "125 ML",
+        "price": 1500
+      }
+    ],
+    "notes": {
+      "top": [
+        "—"
+      ],
+      "base": [
+        "—"
+      ],
+      "heart": [
+        "—"
+      ]
+    },
+    "image": "https://cfpiizuovdhbbgkugxyy.supabase.co/storage/v1/object/public/product-images/0.6326336119019015.png",
+    "discount_percent": 0,
+    "created_at": "2026-04-09T15:09:35.506868+00:00",
+    "updated_at": "2026-04-09T15:09:35.506868+00:00"
+  },
+  {
+    "id": "5398c4be-353a-496e-92fd-d5f83d2e8878",
+    "name": "Tom Ford Ombrè Leather - 100ML",
+    "brand": "Tom Ford",
+    "price": 1500,
+    "stock": 10,
+    "description": "Ombré Leather Parfum by Tom Ford is a Leather fragrance for women and men. This is a new fragrance. Ombré Leather Parfum was launched in 2021. The nose behind this fragrance is Sonia Constant.\n\n",
+    "gender": "Unisex",
+    "scent_family": "Woody",
+    "sizes": [
+      {
+        "label": "100 ML",
+        "price": 1500
+      }
+    ],
+    "notes": {
+      "top": [
+        "—"
+      ],
+      "base": [
+        "—"
+      ],
+      "heart": [
+        "—"
+      ]
+    },
+    "image": "https://cfpiizuovdhbbgkugxyy.supabase.co/storage/v1/object/public/product-images/0.20529923933535277.png",
+    "discount_percent": 0,
+    "created_at": "2026-04-09T14:50:39.864988+00:00",
+    "updated_at": "2026-04-09T14:50:39.864988+00:00"
+  },
+  {
+    "id": "ac4a4828-967e-426e-a546-81e116bb2f18",
+    "name": "Jean Paul Gaultier Ultra Male Intense - 125ml",
+    "brand": "Jean Paul Gaultier",
+    "price": 1500,
+    "stock": 10,
+    "description": "Your senses will be intoxicated from the start thanks to sweet pear, delicate, refreshing bergamot, and aromatic lavender. These slowly give way to the invigorating notes of spices, and the whole experience is rounded of by a combination of vanilla and woody notes.\n",
+    "gender": "Men",
+    "scent_family": "Oriental",
+    "sizes": [
+      {
+        "label": "125 ML",
+        "price": 1500
+      }
+    ],
+    "notes": {
+      "top": [
+        "—"
+      ],
+      "base": [
+        "—"
+      ],
+      "heart": [
+        "—"
+      ]
+    },
+    "image": "https://cfpiizuovdhbbgkugxyy.supabase.co/storage/v1/object/public/product-images/0.31004076110190437.png",
+    "discount_percent": 0,
+    "created_at": "2026-04-09T15:33:54.87171+00:00",
+    "updated_at": "2026-04-09T15:33:54.87171+00:00"
+  },
+  {
+    "id": "f5d67f38-2e10-4c57-b62a-aa6bd8f91a52",
+    "name": "Jean Paul Gaultier Le Male Aviator - 125ML",
+    "brand": "Jean Paul Gaultier",
+    "price": 1500,
+    "stock": 10,
+    "description": "Le Mâle Aviator is a limited perfume by Jean Paul Gaultier\n\nThe fragrance was released in 2020.\n\nSuitable for Summer & Spring , recommended for Daily wear & work\n\nThe scent is aromatic-fougere.\n",
+    "gender": "Men",
+    "scent_family": "Fresh",
+    "sizes": [
+      {
+        "label": "125 ML",
+        "price": 1500
+      }
+    ],
+    "notes": {
+      "top": [
+        "—"
+      ],
+      "base": [
+        "—"
+      ],
+      "heart": [
+        "—"
+      ]
+    },
+    "image": "https://cfpiizuovdhbbgkugxyy.supabase.co/storage/v1/object/public/product-images/0.6674904811477732.png",
+    "discount_percent": 0,
+    "created_at": "2026-04-09T15:37:44.276011+00:00",
+    "updated_at": "2026-04-09T15:37:44.276011+00:00"
+  },
+  {
+    "id": "c29034d0-44b3-468e-a8dc-f39f5c959e23",
+    "name": "Jean Paul Gaultier Gaultier Divine - 125 ML",
+    "brand": "Jean Paul Gaultier",
+    "price": 1500,
+    "stock": 10,
+    "description": "A luxurious gift featuring Gaultier Divine by Jean Paul Gaultier, an exquisite Eau de Parfum for women. This thoughtful gesture embodies elegance and sophistication, making it an ideal gift for any occasion.celebrates the essence of refined femininity, offering a captivating and enduring fragrance that showcases the recipient's grace and charm.\n\n",
+    "gender": "Women",
+    "scent_family": "Floral",
+    "sizes": [
+      {
+        "label": "125 ML",
+        "price": 1500
+      }
+    ],
+    "notes": {
+      "top": [
+        "—"
+      ],
+      "base": [
+        "—"
+      ],
+      "heart": [
+        "—"
+      ]
+    },
+    "image": "https://cfpiizuovdhbbgkugxyy.supabase.co/storage/v1/object/public/product-images/0.6192730977073648.png",
+    "discount_percent": 0,
+    "created_at": "2026-04-09T15:47:49.15864+00:00",
+    "updated_at": "2026-04-09T15:47:49.15864+00:00"
+  },
+  {
+    "id": "1b029c04-8471-40ee-a6aa-e1c8102b2958",
+    "name": "Jean Paul Gaultier La Belle Fleur Terrible - 100 ML",
+    "brand": "Jean Paul Gaultier",
+    "price": 1500,
+    "stock": 10,
+    "description": "Fragrance La Belle Fleur Terrible perfume for Women by Jean Paul Gaultier was released in 2022. it is an aroma highlighted by a bouquet of fragrant floral, powdery and aquatic scented tones that will bring a sensual, purifying and light perfumed sensation. Based on the combination of notes Jean Paul Gaultier La Belle Fleur Terrible is classified as Floral Aquatic fragrance to the nose. The fragrance composition is a creation of Quentin Bisch. The emanation of flavors and scent notes for La Belle Fleur Terrible unfurl in a whiff of floral opening top notes including lotus and water lily. The floral heart center notes blend in with iris while the deep spice base notes leave an impression of vanilla.\n",
+    "gender": "Women",
+    "scent_family": "Floral",
+    "sizes": [
+      {
+        "label": "100 ML",
+        "price": 1500
+      }
+    ],
+    "notes": {
+      "top": [
+        "—"
+      ],
+      "base": [
+        "—"
+      ],
+      "heart": [
+        "—"
+      ]
+    },
+    "image": "https://cfpiizuovdhbbgkugxyy.supabase.co/storage/v1/object/public/product-images/0.8893409743837801.png",
+    "discount_percent": 0,
+    "created_at": "2026-04-09T15:53:41.498639+00:00",
+    "updated_at": "2026-04-09T15:53:41.498639+00:00"
+  },
+  {
+    "id": "0c81de04-a804-4c65-8bae-921d1ef6ef80",
+    "name": "Jean Paul Gaultier Le Male Le Parfum - 125ML",
+    "brand": "Jean Paul Gaultier",
+    "price": 1500,
+    "stock": 10,
+    "description": "Jean Paul Gaultier",
+    "gender": "Men",
+    "scent_family": "Oriental",
+    "sizes": [
+      {
+        "label": "125 ML",
+        "price": 1500
+      }
+    ],
+    "notes": {
+      "top": [
+        "—"
+      ],
+      "base": [
+        "—"
+      ],
+      "heart": [
+        "—"
+      ]
+    },
+    "image": "https://cfpiizuovdhbbgkugxyy.supabase.co/storage/v1/object/public/product-images/0.1500458520789949.png",
+    "discount_percent": 0,
+    "created_at": "2026-04-09T16:11:23.52904+00:00",
+    "updated_at": "2026-04-09T16:11:23.52904+00:00"
+  },
+  {
+    "id": "fc914d98-e397-4bac-b193-1563bc72fd46",
+    "name": "Jean Paul Gaultier Le Beau Paradise Garden - 125ML",
+    "brand": "Jean Paul Gaultier",
+    "price": 1500,
+    "stock": 10,
+    "description": "Top Notes\nCoconut water\nMiddle Notes\nGreen Fig\nBase Notes\nSandalwood\n",
+    "gender": "Men",
+    "scent_family": "Woody",
+    "sizes": [
+      {
+        "label": "125 ML",
+        "price": 1500
+      }
+    ],
+    "notes": {
+      "top": [
+        "—"
+      ],
+      "base": [
+        "—"
+      ],
+      "heart": [
+        "—"
+      ]
+    },
+    "image": "https://cfpiizuovdhbbgkugxyy.supabase.co/storage/v1/object/public/product-images/0.5706553847248387.png",
+    "discount_percent": 0,
+    "created_at": "2026-04-09T16:09:25.704017+00:00",
+    "updated_at": "2026-04-09T16:09:25.704017+00:00"
+  },
+  {
+    "id": "dc693e8e-5d55-4796-9f99-0e3a47be0264",
+    "name": "Jean Paul Gaultier La Belle Le Parfum - 125ML",
+    "brand": "Jean Paul Gaultier",
+    "price": 1500,
+    "stock": 10,
+    "description": "La Belle Le Parfum by Jean Paul Gaultier is a Oriental Vanilla fragrance for women.\n\nTop note is Pear; middle notes are Tonka Bean and Jasmine; base note is Vanilla.",
+    "gender": "Women",
+    "scent_family": "Oriental",
+    "sizes": [
+      {
+        "label": "125 ML",
+        "price": 1500
+      }
+    ],
+    "notes": {
+      "top": [
+        "—"
+      ],
+      "base": [
+        "—"
+      ],
+      "heart": [
+        "—"
+      ]
+    },
+    "image": "https://cfpiizuovdhbbgkugxyy.supabase.co/storage/v1/object/public/product-images/0.4637421280550482.png",
+    "discount_percent": 0,
+    "created_at": "2026-04-09T16:13:54.633872+00:00",
+    "updated_at": "2026-04-09T16:13:54.633872+00:00"
+  },
+  {
+    "id": "6d2c73f5-0b60-4e3b-8dcf-8f72552a993e",
+    "name": "Jean Paul Gaultier Scandal Le Parfum - 80ML",
+    "brand": "Jean Paul Gaultier",
+    "price": 1400,
+    "stock": 10,
+    "description": "Scandal Le Parfum by Jean Paul Gaultier is a Oriental Floral fragrance for women. Top note is Jasmine; middle notes are Caramel and Salt; base note is Vanilla.",
+    "gender": "Men",
+    "scent_family": "Woody",
+    "sizes": [
+      {
+        "label": "80 ML",
+        "price": 1400
+      }
+    ],
+    "notes": {
+      "top": [
+        "—"
+      ],
+      "base": [
+        "—"
+      ],
+      "heart": [
+        "—"
+      ]
+    },
+    "image": "https://cfpiizuovdhbbgkugxyy.supabase.co/storage/v1/object/public/product-images/0.4839089323073962.png",
+    "discount_percent": 0,
+    "created_at": "2026-04-09T16:31:10.549843+00:00",
+    "updated_at": "2026-04-09T16:31:10.549843+00:00"
+  },
+  {
+    "id": "1e61d0c3-6c08-4d9d-9867-7aefa64b6083",
+    "name": "Jean Paul Gaultier Scandal Pour Homme Le Parfum - 100ML",
+    "brand": "Jean Paul Gaultier",
+    "price": 1400,
+    "stock": 10,
+    "description": "Ladies and gentlemen, please welcome the King of the Ring: SCANDAL POUR HOMME Le Parfum!You’ve dreamed about it. You’ve waited for it. Surprise!!! The darling of the House of Gaultier makes a stunning comeback with an even more scandalous Eau de Parfum Intense that is sure to create a stir. The crowd surges forward to admire this man with a swagger like no one else. The King of the Ring and the Champ of Swagger. A few clever moves set the room ablaze. Check out the fancy footwork and powerful punches. ",
+    "gender": "Men",
+    "scent_family": "Oriental",
+    "sizes": [
+      {
+        "label": "100 ML",
+        "price": 1400
+      }
+    ],
+    "notes": {
+      "top": [
+        "—"
+      ],
+      "base": [
+        "—"
+      ],
+      "heart": [
+        "—"
+      ]
+    },
+    "image": "https://cfpiizuovdhbbgkugxyy.supabase.co/storage/v1/object/public/product-images/0.15783569437681444.png",
+    "discount_percent": 0,
+    "created_at": "2026-04-09T18:57:50.006074+00:00",
+    "updated_at": "2026-04-09T18:57:50.006074+00:00"
+  },
+  {
+    "id": "719e1f1b-67c1-4de0-b730-685d4b1ff531",
+    "name": "Tom Ford Velvet Orchid - 100ML",
+    "brand": "Tom Ford",
+    "price": 1300,
+    "stock": 9,
+    "description": "Velvet Orchid lives in Black Orchid’s world of glamorous mystique, while exuding its own ultra-feminine essence. Lavished with shimmering freshness, honey, rum and a dramatic floral veil, a new character emerges: one that pulls, rather than pushes; elegantly refined and polished.",
+    "gender": "Women",
+    "scent_family": "Oriental",
+    "sizes": [
+      {
+        "label": "100 ML",
+        "price": 1300
+      }
+    ],
+    "notes": {
+      "top": [
+        "—"
+      ],
+      "base": [
+        "—"
+      ],
+      "heart": [
+        "—"
+      ]
+    },
+    "image": "https://cfpiizuovdhbbgkugxyy.supabase.co/storage/v1/object/public/product-images/0.18069201423011594.png",
+    "discount_percent": 0,
+    "created_at": "2026-04-08T18:24:34.557297+00:00",
+    "updated_at": "2026-04-10T19:44:48.84405+00:00"
+  },
+  {
+    "id": "3a37b3ce-4d06-45d9-b03f-40c51e728e3b",
+    "name": "Jean Paul Gaultier So Scandal - 80ML",
+    "brand": "Jean Paul Gaultier",
+    "price": 1400,
+    "stock": 4,
+    "description": "Jean Paul Gaultier So Scandal! Eau de Parfum is a floral fruity perfume that tells a story of a daring woman that is unapologetically determined. Her style and her confidence are indisputable, and her perfume lives up to her attitude. This fragrance reflects Jean Paul Gaultier’s haute couture. So Scandal! brings an even more striking floral experience than ever before. The ambassador and muse of the Scandal fragrance line is the spellbinding Irina Shayk who perfectly embodies the story and character of this addictive feminine fragrance.",
+    "gender": "Women",
+    "scent_family": "Floral",
+    "sizes": [
+      {
+        "label": "100ml",
+        "price": 1400
+      }
+    ],
+    "notes": {
+      "top": [
+        "—"
+      ],
+      "base": [
+        "—"
+      ],
+      "heart": [
+        "—"
+      ]
+    },
+    "image": "https://cfpiizuovdhbbgkugxyy.supabase.co/storage/v1/object/public/product-images/0.6574286162668452.png",
+    "discount_percent": 0,
+    "created_at": "2026-04-10T15:36:56.393023+00:00",
+    "updated_at": "2026-04-10T20:10:44.527421+00:00"
+  }
+]

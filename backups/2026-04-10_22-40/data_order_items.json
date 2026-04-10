@@ -1,0 +1,24 @@
+[
+  {
+    "id": "25167f2b-ccd1-49d7-9ab1-d35767eeb6ad",
+    "order_id": "ef27d91b-fe4d-4867-942b-df24f00647eb",
+    "product_id": "3a37b3ce-4d06-45d9-b03f-40c51e728e3b",
+    "product_name": "Jean Paul Gaultier So Scandal - 80ML",
+    "product_brand": "Jean Paul Gaultier",
+    "size": "100ml",
+    "quantity": 2,
+    "unit_price": 1400,
+    "total_price": 2800
+  },
+  {
+    "id": "b13aa7dc-9dd8-4e75-80b2-32e7374a1281",
+    "order_id": "8e563592-217c-4cdd-9e7f-4938558d46a6",
+    "product_id": "3a37b3ce-4d06-45d9-b03f-40c51e728e3b",
+    "product_name": "Jean Paul Gaultier So Scandal - 80ML",
+    "product_brand": "Jean Paul Gaultier",
+    "size": "100ml",
+    "quantity": 4,
+    "unit_price": 1400,
+    "total_price": 5600
+  }
+]

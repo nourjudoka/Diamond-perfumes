@@ -209,6 +209,7 @@ export type Database = {
           name: string
           notes: Json
           price: number
+          product_type: string
           scent_family: string
           sizes: string[]
           stock: number
@@ -225,6 +226,7 @@ export type Database = {
           name: string
           notes?: Json
           price: number
+          product_type?: string
           scent_family?: string
           sizes?: string[]
           stock?: number
@@ -241,6 +243,7 @@ export type Database = {
           name?: string
           notes?: Json
           price?: number
+          product_type?: string
           scent_family?: string
           sizes?: string[]
           stock?: number
