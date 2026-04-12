@@ -60,7 +60,7 @@ export default function ShopPage() {
           <p className="text-sm text-muted-foreground font-sans">{filtered.length} products</p>
         </div>
 
-        <div className="flex gap-10">
+        <div className="flex flex-col md:flex-row gap-8 md:gap-10">
           {/* Sidebar */}
           <aside className="w-44 shrink-0 hidden md:block">
 
