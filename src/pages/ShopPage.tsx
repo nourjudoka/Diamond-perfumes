@@ -171,7 +171,7 @@ export default function ShopPage() {
           </div>
 
           {/* Product grid */}
-          <div className="flex-1">
+          <div className="flex-1 min-w-0 w-full overflow-hidden">
             {filtered.length === 0 ? (
               <div className="text-center py-20">
                 <p className="text-muted-foreground font-sans text-sm">No products match your selection.</p>

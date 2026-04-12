@@ -40,9 +40,9 @@ export function ProductCard({ product }: { product: DbProduct }) {
         </div>
       </Link>
       <div className="space-y-1.5 flex flex-col flex-grow px-2 md:px-0">
-        <p className="text-[10px] md:text-xs uppercase tracking-[0.25em] text-muted-foreground font-sans">{product.brand}</p>
-        <Link to={`/product/${product.id}`} className="flex-grow">
-          <h3 className="font-serif text-sm md:text-base hover:text-primary transition-colors line-clamp-2 md:leading-relaxed">{product.name}</h3>
+        <p className="text-[10px] md:text-xs uppercase tracking-wider md:tracking-[0.25em] text-muted-foreground font-sans truncate">{product.brand}</p>
+        <Link to={`/product/${product.id}`} className="flex-grow min-w-0">
+          <h3 className="font-serif text-sm md:text-base hover:text-primary transition-colors line-clamp-2 md:leading-relaxed break-words">{product.name}</h3>
         </Link>
         <div className="flex items-center justify-between pt-3 pb-2 border-t border-border/50 mt-auto">
           <div className="flex flex-col">
