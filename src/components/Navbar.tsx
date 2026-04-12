@@ -8,10 +8,8 @@ import brandLogo from '../../DIAMOND LOGO (1).png';
 
 const navLinks = [
   { label: 'Shop All', to: '/shop' },
-  { label: 'Brands', to: '/shop?filter=brands' },
-  { label: 'Men', to: '/shop?gender=Men' },
-  { label: 'Women', to: '/shop?gender=Women' },
-  { label: 'Unisex', to: '/shop?gender=Unisex' },
+  { label: 'Master Box', to: '/shop?type=Master%20Box' },
+  { label: 'Tester', to: '/shop?type=Tester' },
 ];
 
 export function Navbar() {
@@ -39,9 +37,14 @@ export function Navbar() {
                 }}
                 className="h-10 md:h-12 w-auto"
               />
-              <span className="font-serif text-lg md:text-xl tracking-[0.1em] uppercase hidden sm:inline text-[#D4AF37]">
-                Diamond Perfume
-              </span>
+              <div className="hidden sm:flex flex-col">
+                <span className="font-serif text-lg md:text-xl tracking-[0.1em] uppercase text-[#D4AF37]">
+                  Diamond Perfume
+                </span>
+                <span className="text-[10px] tracking-[0.15em] text-muted-foreground italic">
+                  More than perfume, it is you
+                </span>
+              </div>
             </Link>
 
             {/* Desktop nav */}

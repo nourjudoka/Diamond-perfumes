@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useProducts } from '@/hooks/useProducts';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
@@ -6,20 +6,25 @@ import { ProductCard } from '@/components/ProductCard';
 import { Loader2 } from 'lucide-react';
 import { useSearchParams } from 'react-router-dom';
 
-type Gender = 'Men' | 'Women';
+type Gender = 'Men' | 'Women' | 'Unisex';
 type ProductType = 'Master Box' | 'Tester';
 
 export default function ShopPage() {
   const { data: products = [], isLoading } = useProducts();
   const [searchParams] = useSearchParams();
-  const initialGender = (searchParams.get('gender') as Gender | null);
+  const [selectedGender, setSelectedGender] = useState<Gender | null>(searchParams.get('gender') as Gender | null);
+  const [selectedType, setSelectedType] = useState<ProductType | null>(searchParams.get('type') as ProductType | null);
+  const [showBestSellersOnly, setShowBestSellersOnly] = useState(false);
 
-  const [selectedGender, setSelectedGender] = useState<Gender | null>(initialGender);
-  const [selectedType, setSelectedType] = useState<ProductType | null>(null);
+  useEffect(() => {
+    setSelectedGender(searchParams.get('gender') as Gender | null);
+    setSelectedType(searchParams.get('type') as ProductType | null);
+  }, [searchParams]);
 
   const filtered = useMemo(() => {
     return products.filter((p) => {
       if (selectedGender) {
+        if (selectedGender === 'Unisex' && p.gender !== 'Unisex') return false;
         if (selectedGender === 'Men' && p.gender !== 'Men' && p.gender !== 'Unisex') return false;
         if (selectedGender === 'Women' && p.gender !== 'Women' && p.gender !== 'Unisex') return false;
       }
@@ -27,9 +32,12 @@ export default function ShopPage() {
         const pt = (p as unknown as { product_type: string }).product_type ?? 'Master Box';
         if (pt !== selectedType) return false;
       }
+      if (showBestSellersOnly && !p.is_best_seller) {
+        return false;
+      }
       return true;
     });
-  }, [products, selectedGender, selectedType]);
+  }, [products, selectedGender, selectedType, showBestSellersOnly]);
 
   if (isLoading) {
     return (
@@ -60,7 +68,7 @@ export default function ShopPage() {
             <div className="mb-8">
               <p className="text-[10px] uppercase tracking-[0.2em] font-sans font-medium mb-4">Gender</p>
               <div className="space-y-1">
-                {(['Men', 'Women'] as Gender[]).map((g) => (
+                {(['Men', 'Women', 'Unisex'] as Gender[]).map((g) => (
                   <button
                     key={g}
                     onClick={() => setSelectedGender(selectedGender === g ? null : g)}
@@ -70,7 +78,7 @@ export default function ShopPage() {
                         : 'text-muted-foreground hover:text-foreground hover:bg-secondary'
                     }`}
                   >
-                    <span>{g === 'Men' ? '♂' : '♀'}</span>
+                    <span>{g === 'Men' ? '♂' : g === 'Women' ? '♀' : '⚥'}</span>
                     {g}
                   </button>
                 ))}
@@ -80,27 +88,47 @@ export default function ShopPage() {
             {/* Product type filter */}
             <div className="mb-8">
               <p className="text-[10px] uppercase tracking-[0.2em] font-sans font-medium mb-4">Type</p>
-              <div className="space-y-1">
+              <div className="space-y-2">
                 {(['Master Box', 'Tester'] as ProductType[]).map((t) => (
-                  <button
+                  <label
                     key={t}
-                    onClick={() => setSelectedType(selectedType === t ? null : t)}
-                    className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs font-sans text-left transition-colors ${
-                      selectedType === t
-                        ? 'bg-primary text-primary-foreground'
-                        : 'text-muted-foreground hover:text-foreground hover:bg-secondary'
-                    }`}
+                    className="flex items-center gap-2.5 px-3 py-2 text-xs font-sans cursor-pointer hover:bg-secondary transition-colors"
                   >
-                    <span>{t === 'Master Box' ? '📦' : '🧪'}</span>
-                    {t}
-                  </button>
+                    <input
+                      type="checkbox"
+                      checked={selectedType === t}
+                      onChange={() => setSelectedType(selectedType === t ? null : t)}
+                      className="accent-primary w-3.5 h-3.5 cursor-pointer"
+                    />
+                    <span className={selectedType === t ? 'text-foreground font-medium' : 'text-muted-foreground'}>
+                      {t}
+                    </span>
+                  </label>
                 ))}
               </div>
             </div>
 
-            {(selectedGender || selectedType) && (
+            {/* Collection filter */}
+            <div className="mb-8">
+              <p className="text-[10px] uppercase tracking-[0.2em] font-sans font-medium mb-4">Collection</p>
+              <div className="space-y-2">
+                  <label className="flex items-center gap-2.5 px-3 py-2 text-xs font-sans cursor-pointer hover:bg-secondary transition-colors">
+                    <input
+                      type="checkbox"
+                      checked={showBestSellersOnly}
+                      onChange={(e) => setShowBestSellersOnly(e.target.checked)}
+                      className="accent-primary w-3.5 h-3.5 cursor-pointer"
+                    />
+                    <span className={showBestSellersOnly ? 'text-primary font-medium flex items-center gap-1.5' : 'text-muted-foreground flex items-center gap-1.5'}>
+                      Best Sellers <span className="text-[10px]">★</span>
+                    </span>
+                  </label>
+              </div>
+            </div>
+
+            {(selectedGender || selectedType || showBestSellersOnly) && (
               <button
-                onClick={() => { setSelectedGender(null); setSelectedType(null); }}
+                onClick={() => { setSelectedGender(null); setSelectedType(null); setShowBestSellersOnly(false); }}
                 className="text-[10px] text-muted-foreground hover:text-foreground font-sans underline underline-offset-2 transition-colors"
               >
                 Clear filters
@@ -110,7 +138,15 @@ export default function ShopPage() {
 
           {/* Mobile filter pills */}
           <div className="md:hidden w-full mb-4 flex flex-wrap gap-2">
-            {(['Men', 'Women'] as Gender[]).map((g) => (
+            <button
+                onClick={() => setShowBestSellersOnly(!showBestSellersOnly)}
+                className={`px-3 py-1.5 text-xs font-sans border transition-colors flex items-center gap-1 ${
+                  showBestSellersOnly ? 'bg-primary text-primary-foreground border-primary' : 'border-border text-muted-foreground'
+                }`}
+              >
+                Best Sellers <span className="text-[9px]">★</span>
+            </button>
+            {(['Men', 'Women', 'Unisex'] as Gender[]).map((g) => (
               <button
                 key={g}
                 onClick={() => setSelectedGender(selectedGender === g ? null : g)}
@@ -140,7 +176,7 @@ export default function ShopPage() {
               <div className="text-center py-20">
                 <p className="text-muted-foreground font-sans text-sm">No products match your selection.</p>
                 <button
-                  onClick={() => { setSelectedGender(null); setSelectedType(null); }}
+                  onClick={() => { setSelectedGender(null); setSelectedType(null); setShowBestSellersOnly(false); }}
                   className="mt-4 text-xs underline font-sans"
                 >
                   Clear filters

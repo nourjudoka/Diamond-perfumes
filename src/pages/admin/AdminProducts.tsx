@@ -10,7 +10,7 @@ interface SizeEntry { label: string; price: string; }
 const EMPTY_FORM = {
   name: '', brand: '', stock: '', description: '',
   gender: 'Unisex', scentFamily: 'Woody', discount: '0', image: '',
-  productType: 'Master Box',
+  productType: 'Master Box', isBestSeller: false,
 };
 
 const EMPTY_SIZE: SizeEntry = { label: '', price: '' };
@@ -81,9 +81,10 @@ export default function AdminProducts() {
       description: p.description ?? '', gender: p.gender ?? 'Unisex',
       scentFamily: p.scent_family ?? 'Woody', discount: String(p.discount_percent ?? 0), image: p.image ?? '',
       productType: (p as unknown as { product_type: string }).product_type ?? 'Master Box',
+      isBestSeller: p.is_best_seller ?? false,
     });
     const existingSizes = Array.isArray(p.sizes)
-      ? (p.sizes as { label: string; price: number }[]).map(s => ({ label: s.label, price: String(s.price) }))
+      ? (p.sizes as unknown as { label: string; price: number }[]).map(s => ({ label: s.label, price: String(s.price) }))
       : [{ label: '100ml', price: String(p.price ?? '') }];
     setSizes(existingSizes);
     setImageFile(null);
@@ -121,6 +122,7 @@ export default function AdminProducts() {
         stock: Number(form.stock),
         discount_percent: Number(form.discount),
         product_type: form.productType,
+        is_best_seller: form.isBestSeller,
       };
 
       if (editId) {
@@ -158,18 +160,21 @@ export default function AdminProducts() {
         <table className="w-full">
           <thead>
             <tr className="border-b border-border">
-              {['Product', 'Brand', 'Type', 'Gender', 'Sizes', 'From Price', 'Discount', 'Stock', ''].map((h) => (
+              {['Product', 'Brand', 'Type', 'Gender', 'Sizes', 'From Price', 'Discount', 'Stock', 'Best Seller', ''].map((h) => (
                 <th key={h} className="text-left px-6 py-3 text-[10px] uppercase tracking-[0.2em] font-sans font-medium text-muted-foreground">{h}</th>
               ))}
             </tr>
           </thead>
           <tbody>
             {products.map((p) => {
-              const pSizes = Array.isArray(p.sizes) ? p.sizes as { label: string; price: number }[] : [];
+              const pSizes = Array.isArray(p.sizes) ? (p.sizes as unknown as { label: string; price: number }[]) : [];
               const minPrice = pSizes.length > 0 ? Math.min(...pSizes.map(s => s.price)) : p.price;
               return (
                 <tr key={p.id} className="border-b border-border last:border-0 hover:bg-secondary/50 transition-colors">
-                  <td className="px-6 py-4 text-sm font-sans font-medium">{p.name}</td>
+                  <td className="px-6 py-4 text-sm font-sans font-medium">
+                    {p.name}
+                    {p.is_best_seller && <span className="ml-2 text-primary" title="Best Seller">★</span>}
+                  </td>
                   <td className="px-6 py-4 text-sm font-sans text-muted-foreground">{p.brand}</td>
                   <td className="px-6 py-4">
                     <select
@@ -205,6 +210,15 @@ export default function AdminProducts() {
                   </td>
                   <td className="px-6 py-4 text-sm font-sans">{p.stock}</td>
                   <td className="px-6 py-4">
+                    <input 
+                      type="checkbox" 
+                      className="w-4 h-4 accent-primary cursor-pointer"
+                      checked={p.is_best_seller ?? false}
+                      onChange={(e) => updateProduct.mutate({ id: p.id, updates: { is_best_seller: e.target.checked } })}
+                      title="Toggle Best Seller Status"
+                    />
+                  </td>
+                  <td className="px-6 py-4">
                     <div className="flex items-center gap-1">
                       <button onClick={() => openEdit(p)} className="p-1.5 hover:bg-secondary rounded-sm text-muted-foreground hover:text-foreground transition-colors" title="Edit">
                         <Pencil className="h-3.5 w-3.5" />
@@ -235,7 +249,7 @@ export default function AdminProducts() {
             ].map((field) => (
               <div key={field.key}>
                 <label className="text-[10px] uppercase tracking-[0.2em] font-sans font-medium block mb-1.5">{field.label}</label>
-                <input type={field.type || 'text'} value={(form as Record<string, string>)[field.key]}
+                <input type={field.type || 'text'} value={(form as any)[field.key]}
                   onChange={(e) => setForm({ ...form, [field.key]: e.target.value })}
                   className="w-full border border-border px-4 py-3 text-sm font-sans focus:outline-none focus:border-foreground transition-colors bg-background" />
               </div>
@@ -281,6 +295,15 @@ export default function AdminProducts() {
               <label className="text-[10px] uppercase tracking-[0.2em] font-sans font-medium block mb-1.5">Description</label>
               <textarea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })}
                 rows={3} className="w-full border border-border px-4 py-3 text-sm font-sans focus:outline-none focus:border-foreground transition-colors resize-none bg-background" />
+            </div>
+
+            <div className="flex items-center gap-2 mt-4">
+              <input type="checkbox" id="isBestSeller" checked={form.isBestSeller}
+                onChange={(e) => setForm({ ...form, isBestSeller: e.target.checked })}
+                className="w-4 h-4 cursor-pointer accent-primary" />
+              <label htmlFor="isBestSeller" className="text-sm font-sans cursor-pointer text-muted-foreground">
+                Mark as Best Seller
+              </label>
             </div>
 
             <button onClick={handleSave} disabled={addProduct.isPending || updateProduct.isPending || isUploading || sizes.length === 0}

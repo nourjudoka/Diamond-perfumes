@@ -214,6 +214,7 @@ export type Database = {
           sizes: string[]
           stock: number
           updated_at: string
+          is_best_seller: boolean | null
         }
         Insert: {
           brand: string
@@ -231,6 +232,7 @@ export type Database = {
           sizes?: string[]
           stock?: number
           updated_at?: string
+          is_best_seller?: boolean | null
         }
         Update: {
           brand?: string
@@ -248,6 +250,7 @@ export type Database = {
           sizes?: string[]
           stock?: number
           updated_at?: string
+          is_best_seller?: boolean | null
         }
         Relationships: []
       }

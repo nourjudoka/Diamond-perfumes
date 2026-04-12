@@ -136,24 +136,7 @@ export default function ProductPage() {
               {product.stock === 0 ? 'Out of Stock' : 'Add to Bag'}
             </button>
 
-            <Accordion type="multiple" className="w-full">
-              <AccordionItem value="notes">
-                <AccordionTrigger className="text-xs uppercase tracking-[0.2em] font-sans font-medium">Fragrance Notes</AccordionTrigger>
-                <AccordionContent>
-                  <div className="space-y-3 text-sm font-sans text-muted-foreground">
-                    <div><span className="text-foreground font-medium">Top:</span> {notes.top?.join(', ') || '—'}</div>
-                    <div><span className="text-foreground font-medium">Heart:</span> {notes.heart?.join(', ') || '—'}</div>
-                    <div><span className="text-foreground font-medium">Base:</span> {notes.base?.join(', ') || '—'}</div>
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="description">
-                <AccordionTrigger className="text-xs uppercase tracking-[0.2em] font-sans font-medium">Description</AccordionTrigger>
-                <AccordionContent>
-                  <p className="text-sm font-sans text-muted-foreground leading-relaxed">{product.description}</p>
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
+
           </motion.div>
         </div>
       </div>

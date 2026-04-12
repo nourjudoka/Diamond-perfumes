@@ -5,7 +5,15 @@ import { ProductCard } from '@/components/ProductCard';
 import { useProducts } from '@/hooks/useProducts';
 import { useActiveDiscounts } from '@/hooks/useDiscounts';
 import { motion } from 'framer-motion';
-import { ArrowRight, Tag } from 'lucide-react';
+import { ArrowRight, Tag, Star } from 'lucide-react';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
 const brands = ['Tom Ford', 'Chanel', 'Dior', 'Guerlain', 'Creed', 'YSL'];
 
@@ -13,69 +21,118 @@ export default function HomePage() {
   const { data: products = [] } = useProducts();
   const { data: discounts = [] } = useActiveDiscounts();
   const websiteOffers = discounts.filter((d) => !d.code);
-  const featured = products.slice(0, 4);
+  const bestSellers = products.filter(p => p.is_best_seller);
+  const featured = products.filter(p => !p.is_best_seller).slice(0, 4);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background">
       <Navbar />
+      
       {websiteOffers.length > 0 && (
-        <div className="bg-primary/10 border-b border-primary/20">
-          <div className="container mx-auto px-4 py-2 flex items-center justify-center gap-3 overflow-x-auto">
+        <div className="bg-primary/5 border-b border-primary/10">
+          <div className="container mx-auto px-4 py-3 flex items-center justify-center gap-4 overflow-x-auto">
             {websiteOffers.map((d) => (
-              <div key={d.id} className="flex items-center gap-1.5 shrink-0">
-                <Tag className="h-3 w-3 text-primary" />
-                <span className="text-xs font-sans text-primary font-medium">{d.name}</span>
+              <div key={d.id} className="flex items-center gap-2 shrink-0">
+                <Tag className="h-3.5 w-3.5 text-primary" />
+                <span className="text-[11px] uppercase tracking-[0.2em] font-sans text-primary font-semibold">{d.name}</span>
               </div>
             ))}
           </div>
         </div>
       )}
-      <motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}
-        className="relative h-[80vh] flex items-center justify-center bg-gradient-to-b from-background/60 via-background to-background">
-        <div className="text-center px-4">
-          <motion.p initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.3 }}
-            className="text-xs tracking-[0.4em] uppercase text-muted-foreground font-sans mb-4">Premium Fragrance House</motion.p>
-          <motion.h1 initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.5 }}
-            className="font-serif text-5xl md:text-7xl mb-6 leading-tight">Diamond<br />Perfume</motion.h1>
-          <motion.p initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.7 }}
-            className="text-sm text-muted-foreground max-w-md mx-auto mb-8 font-sans leading-relaxed">
-            Curated collection of the world's finest fragrances.
-          </motion.p>
-          <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.9 }}>
-            <Link to="/shop" className="btn-luxury inline-flex items-center gap-2">Explore Collection <ArrowRight className="h-4 w-4" /></Link>
+
+      {/* Ultra-Luxury Hero Section */}
+      <motion.section 
+        initial={{ opacity: 0 }} 
+        animate={{ opacity: 1 }} 
+        transition={{ duration: 1.2, ease: "easeOut" }}
+        className="relative min-h-[85vh] flex items-center justify-center bg-black overflow-hidden"
+      >
+        <div className="absolute inset-0 bg-[url('/hero-bg.png')] bg-cover bg-center bg-no-repeat opacity-60" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-black/20 to-black/60 pointer-events-none" />
+        <div className="text-center px-4 relative z-10 max-w-4xl mx-auto flex flex-col items-center">
+          <motion.div
+            initial={{ y: 30, opacity: 0, scale: 0.9 }} 
+            animate={{ y: 0, opacity: 1, scale: 1 }} 
+            transition={{ delay: 0.3, duration: 1.2, ease: "easeOut" }}
+            className="mb-12 flex flex-col items-center"
+          >
+            <img src="/diamond-logo.png" alt="Diamond Scent Studio Logo" className="w-[280px] md:w-[400px] h-auto mx-auto object-contain drop-shadow-2xl brightness-110 contrast-125" />
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.0, duration: 1.0, ease: "easeOut" }}
+              style={{ fontFamily: "'Playfair Display', 'Cormorant Garamond', Georgia, serif" }}
+              className="mt-6 text-xl md:text-3xl tracking-[0.25em] uppercase text-[#D4AF37] drop-shadow-[0_0_18px_rgba(212,175,55,0.55)] font-light italic"
+            >
+              More than perfume, it is you
+            </motion.p>
           </motion.div>
         </div>
       </motion.section>
-      <section className="py-16 border-y border-border">
+
+      {/* Brands Ticker */}
+      <section className="py-12 border-y border-border/50 bg-secondary/30">
         <div className="container mx-auto px-4 md:px-8">
-          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16">
+          <div className="flex flex-wrap items-center justify-center gap-10 md:gap-20 opacity-60 hover:opacity-100 transition-opacity duration-500">
             {brands.map((b) => (
-              <Link key={b} to="/shop" className="text-sm md:text-base tracking-[0.15em] uppercase text-muted-foreground hover:text-primary transition-colors font-sans">{b}</Link>
+              <span key={b} className="text-sm md:text-[15px] tracking-[0.2em] uppercase font-serif text-foreground">{b}</span>
             ))}
           </div>
         </div>
       </section>
-      <section className="py-20">
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="flex items-end justify-between mb-12">
-            <div>
-              <h2 className="section-heading">Featured</h2>
-              <p className="text-sm text-muted-foreground font-sans mt-1">Our most coveted fragrances</p>
+
+      {/* Best Sellers Section */}
+      {bestSellers.length > 0 && (
+        <section className="py-24 md:py-32">
+          <div className="container mx-auto px-4 md:px-8">
+            <div className="flex flex-col items-center justify-center mb-16 text-center">
+              <Star className="h-6 w-6 text-primary mb-4" />
+              <h2 className="font-serif text-4xl md:text-5xl mb-4">Best Sellers</h2>
+              <p className="text-sm tracking-[0.1em] text-muted-foreground uppercase font-sans">Our Most Celebrated Masterpieces</p>
             </div>
-            <Link to="/shop" className="text-xs uppercase tracking-[0.2em] hover:text-primary transition-colors font-sans flex items-center gap-2">View All <ArrowRight className="h-3 w-3" /></Link>
+            <Carousel
+              plugins={[
+                Autoplay({
+                  delay: 1500,
+                  stopOnInteraction: false,
+                }),
+              ]}
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              className="w-full max-w-[100vw]"
+            >
+              <CarouselContent className="-ml-4 md:-ml-8">
+                {bestSellers.map((product) => (
+                  <CarouselItem key={product.id} className="pl-4 md:pl-8 basis-[85%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+                    <ProductCard product={product} />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <div className="hidden md:block">
+                 <CarouselPrevious className="left-0 xl:-left-12 border-primary/20 hover:bg-primary/20 hover:text-primary transition-colors" />
+                 <CarouselNext className="right-0 xl:-right-12 border-primary/20 hover:bg-primary/20 hover:text-primary transition-colors" />
+              </div>
+            </Carousel>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-            {featured.map((product) => (<ProductCard key={product.id} product={product} />))}
-          </div>
+        </section>
+      )}
+
+      {/* Explore Collection CTA */}
+      <section className="py-24 md:py-32 bg-secondary/30 border-t border-border/30 text-center">
+        <div className="container mx-auto px-4 md:px-8 max-w-3xl flex flex-col items-center">
+          <h2 className="font-serif text-4xl md:text-5xl mb-6">Choose From Our Collection</h2>
+          <p className="text-sm tracking-[0.1em] text-muted-foreground uppercase font-sans mb-10 leading-relaxed">
+            Discover our entire range of exceptional designer fragrances, carefully curated for those who demand the absolute best.
+          </p>
+          <Link to="/shop" onClick={() => window.scrollTo({ top: 0 })} className="btn-luxury inline-flex items-center gap-3 px-12 py-4 shadow-xl hover:-translate-y-1 transition-all">
+            Shop Now <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </section>
-      <section className="py-20 bg-secondary">
-        <div className="container mx-auto px-4 md:px-8 text-center">
-          <h2 className="font-serif text-3xl md:text-4xl mb-4">The Art of Scent</h2>
-          <p className="text-sm text-muted-foreground max-w-lg mx-auto mb-8 font-sans leading-relaxed">Every fragrance in our collection is handpicked for its exceptional quality.</p>
-          <Link to="/shop" className="btn-luxury inline-block">Shop Now</Link>
-        </div>
-      </section>
+
       <Footer />
     </div>
   );
