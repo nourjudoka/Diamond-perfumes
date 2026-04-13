@@ -14,11 +14,12 @@ export default function ShopPage() {
   const [searchParams] = useSearchParams();
   const [selectedGender, setSelectedGender] = useState<Gender | null>(searchParams.get('gender') as Gender | null);
   const [selectedType, setSelectedType] = useState<ProductType | null>(searchParams.get('type') as ProductType | null);
-  const [showBestSellersOnly, setShowBestSellersOnly] = useState(false);
+  const [showBestSellersOnly, setShowBestSellersOnly] = useState(searchParams.get('best_sellers') === 'true');
 
   useEffect(() => {
     setSelectedGender(searchParams.get('gender') as Gender | null);
     setSelectedType(searchParams.get('type') as ProductType | null);
+    setShowBestSellersOnly(searchParams.get('best_sellers') === 'true');
   }, [searchParams]);
 
   const filtered = useMemo(() => {

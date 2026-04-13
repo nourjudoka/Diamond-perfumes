@@ -16,9 +16,7 @@ export function Footer() {
             </p>
           </div>
           {[
-            { title: 'Shop', links: ['All Fragrances', 'Men', 'Women', 'Unisex', 'Gift Sets'] },
-            { title: 'Company', links: ['About Us', 'Careers', 'Press', 'Sustainability'] },
-            { title: 'Support', links: ['Contact', 'FAQ', 'Shipping', 'Returns'] },
+            { title: 'Shop', links: ['All Fragrances', 'Men', 'Women', 'Unisex'] },
           ].map((col) => (
             <div key={col.title}>
               <h4 className="text-xs uppercase tracking-[0.2em] font-sans font-medium mb-4 text-primary">{col.title}</h4>
