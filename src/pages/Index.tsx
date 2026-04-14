@@ -63,7 +63,7 @@ export default function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.0, duration: 1.0, ease: "easeOut" }}
               style={{ fontFamily: "'Playfair Display', 'Cormorant Garamond', Georgia, serif" }}
-              className="mt-6 text-xl md:text-3xl tracking-[0.25em] uppercase text-[#D4AF37] drop-shadow-[0_0_18px_rgba(212,175,55,0.55)] font-light italic"
+              className="mt-6 text-xl md:text-3xl tracking-[0.25em] uppercase text-[#D4AF37] drop-shadow-[0_0_18px_rgba(212,175,55,0.55)]"
             >
               More than perfume, it is you
             </motion.p>

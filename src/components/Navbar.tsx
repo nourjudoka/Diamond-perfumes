@@ -42,7 +42,7 @@ export function Navbar() {
                 <span className="font-serif text-lg md:text-xl tracking-[0.1em] uppercase text-[#D4AF37]">
                   Diamond Perfume
                 </span>
-                <span className="text-[10px] tracking-[0.15em] text-muted-foreground italic">
+                <span className="font-serif text-[10px] tracking-[0.2em] uppercase text-[#D4AF37]">
                   More than perfume, it is you
                 </span>
               </div>
