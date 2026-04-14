@@ -13,7 +13,7 @@ import { EGYPT_GOVERNORATES } from '@/constants/egyptGovernorates';
 
 type PaymentMethod = Database['public']['Enums']['payment_method'];
 
-const steps = ['Cart', 'Shipping', 'Payment', 'Confirm'];
+const steps = ['Shipping', 'Payment', 'Confirm'];
 
 const paymentMethods: { id: PaymentMethod; label: string; icon: typeof Smartphone; description: string; details?: string }[] = [
   { id: 'InstaPay', label: 'InstaPay', icon: Smartphone, description: 'Transfer via InstaPay to our account', details: 'kkareemramadann@instapay' },
@@ -21,77 +21,17 @@ const paymentMethods: { id: PaymentMethod; label: string; icon: typeof Smartphon
   { id: 'Cash on Delivery', label: 'Cash on Delivery', icon: Banknote, description: 'Pay when you receive your order' },
 ];
 
-function CartStep({ onNext }: { onNext: () => void }) {
-  const { cart, removeFromCart, updateQuantity } = useStore();
-
-  if (cart.length === 0) {
-    return (
-      <div className="text-center py-16">
-        <ShoppingBag className="h-12 w-12 mx-auto text-muted-foreground/30 mb-4" />
-        <p className="text-muted-foreground font-sans text-sm mb-6">Your bag is empty</p>
-        <Link to="/shop" className="btn-luxury inline-block">Continue Shopping</Link>
-      </div>
-    );
-  }
-
-  return (
-    <div>
-      <h2 className="font-serif text-xl mb-6">Your Bag</h2>
-      <div className="space-y-4">
-        {cart.map((item) => {
-          const effectivePrice = item.product.discount_percent && item.product.discount_percent > 0
-            ? item.product.price * (1 - item.product.discount_percent / 100)
-            : item.product.price;
-          return (
-            <div key={`${item.product.id}-${item.size}`} className="flex gap-4 py-4 border-b border-border">
-              <div className="w-20 h-24 bg-secondary flex items-center justify-center shrink-0">
-                <span className="text-xs text-muted-foreground font-sans">{item.product.brand}</span>
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-sans">{item.product.brand}</p>
-                    <p className="text-sm font-serif mt-0.5">{item.product.name}</p>
-                    <p className="text-xs text-muted-foreground mt-0.5 font-sans">{item.size}</p>
-                    {item.product.discount_percent && item.product.discount_percent > 0 && (
-                      <p className="text-[10px] text-primary font-sans mt-0.5">{item.product.discount_percent}% off applied</p>
-                    )}
-                  </div>
-                  <button onClick={() => removeFromCart(item.product.id, item.size)} className="p-1 hover:text-destructive transition-colors">
-                    <X className="h-4 w-4" />
-                  </button>
-                </div>
-                <div className="flex items-center justify-between mt-3">
-                  <div className="flex items-center border border-border">
-                    <button onClick={() => updateQuantity(item.product.id, item.size, item.quantity - 1)} className="p-1.5 hover:bg-secondary"><Minus className="h-3 w-3" /></button>
-                    <span className="px-3 text-xs font-sans">{item.quantity}</span>
-                    <button onClick={() => updateQuantity(item.product.id, item.size, item.quantity + 1)} className="p-1.5 hover:bg-secondary"><Plus className="h-3 w-3" /></button>
-                  </div>
-                  <span className="text-sm font-sans font-medium">EGP {(effectivePrice * item.quantity).toFixed(0)}</span>
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-      <button onClick={onNext} className="btn-luxury mt-8 w-full">Continue to Shipping</button>
-    </div>
-  );
-}
-
-function ShippingStep({ shipping, shippingErrors, setShipping, onNext, onBack }: {
+function ShippingStep({ shipping, shippingErrors, setShipping, onNext }: {
   shipping: Record<string, string>;
   shippingErrors: Record<string, string>;
   setShipping: (s: Record<string, string>) => void;
   onNext: () => void;
-  onBack: () => void;
 }) {
   return (
     <div className="space-y-4">
       <h2 className="font-serif text-xl mb-4">Shipping Details</h2>
       {[
         { label: 'Full Name', key: 'name' },
-        { label: 'Email', key: 'email' },
         { label: 'Phone', key: 'phone' },
         { label: 'Address', key: 'address' },
         { label: 'City', key: 'city' },
@@ -117,9 +57,8 @@ function ShippingStep({ shipping, shippingErrors, setShipping, onNext, onBack }:
         </select>
         {shippingErrors.governorate && <p className="text-[10px] text-destructive mt-1 font-sans">{shippingErrors.governorate}</p>}
       </div>
-      <div className="flex gap-3 mt-6">
-        <button onClick={onBack} className="btn-outline-luxury">Back</button>
-        <button onClick={onNext} className="btn-luxury flex-1">Continue to Payment</button>
+      <div className="mt-6">
+        <button onClick={onNext} className="btn-luxury w-full">Continue to Payment</button>
       </div>
     </div>
   );
@@ -210,6 +149,7 @@ export default function CheckoutPage() {
   const [step, setStep] = useState(0);
   const [done, setDone] = useState(false);
   const [orderNumber, setOrderNumber] = useState('');
+  const [finalTotal, setFinalTotal] = useState(0);
   const [selectedPayment, setSelectedPayment] = useState<PaymentMethod>('InstaPay');
   const [copied, setCopied] = useState(false);
   const [shipping, setShipping] = useState<Record<string, string>>({
@@ -250,7 +190,6 @@ export default function CheckoutPage() {
   const validateShipping = () => {
     const requiredFields: Array<[string, string]> = [
       ['name', 'Full Name is required'],
-      ['email', 'Email is required'],
       ['phone', 'Phone is required'],
       ['address', 'Address is required'],
       ['city', 'City is required'],
@@ -268,7 +207,7 @@ export default function CheckoutPage() {
 
   const handleShippingNext = () => {
     if (!validateShipping()) return;
-    setStep(2);
+    setStep(1);
   };
 
   const handleCopy = (text: string) => {
@@ -297,7 +236,7 @@ export default function CheckoutPage() {
 
   const handlePlaceOrder = async () => {
     if (!validateShipping()) {
-      setStep(1);
+      setStep(0);
       return;
     }
 
@@ -331,6 +270,7 @@ export default function CheckoutPage() {
         })),
       });
       setOrderNumber(num);
+      setFinalTotal(total);
       clearCart();
       setDone(true);
     } catch (err) {
@@ -362,7 +302,7 @@ export default function CheckoutPage() {
                 <p className="text-[10px] uppercase tracking-[0.2em] font-sans font-medium text-muted-foreground mb-2">Payment Instructions</p>
                 {selectedPayment === 'InstaPay' && (
                   <div className="text-sm font-sans space-y-1">
-                    <p>Please send <strong>EGP {total.toFixed(0)}</strong> via InstaPay to <strong>kkareemramadann@instapay</strong>.</p>
+                    <p>Please send <strong>EGP {finalTotal.toFixed(0)}</strong> via InstaPay to <strong>kkareemramadann@instapay</strong>.</p>
                     <p>
                       Link:{' '}
                       <a
@@ -379,7 +319,7 @@ export default function CheckoutPage() {
                   </div>
                 )}
                 {selectedPayment === 'Vodafone Cash' && (
-                  <p className="text-sm font-sans">Please send <strong>EGP {total.toFixed(0)}</strong> to Orange Cash wallet <strong>01286500085</strong>.</p>
+                  <p className="text-sm font-sans">Please send <strong>EGP {finalTotal.toFixed(0)}</strong> to Orange Cash wallet <strong>01286500085</strong>.</p>
                 )}
                 <p className="text-xs text-muted-foreground font-sans mt-3">
                   Required: send a screenshot of your payment to <strong>01286500085</strong>.
@@ -418,28 +358,26 @@ export default function CheckoutPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 max-w-5xl mx-auto">
           <div className="lg:col-span-2">
-            {step === 0 && <CartStep onNext={() => setStep(1)} />}
-            {step === 1 && (
+            {step === 0 && (
               <ShippingStep
                 shipping={shipping}
                 shippingErrors={shippingErrors}
                 setShipping={setShipping}
                 onNext={handleShippingNext}
-                onBack={() => setStep(0)}
               />
             )}
-            {step === 2 && (
+            {step === 1 && (
               <PaymentStep
                 selectedPayment={selectedPayment}
                 setSelectedPayment={setSelectedPayment}
                 copied={copied}
                 handleCopy={handleCopy}
                 deliveryEta={selectedArrivalEta}
-                onNext={() => setStep(3)}
-                onBack={() => setStep(1)}
+                onNext={() => setStep(2)}
+                onBack={() => setStep(0)}
               />
             )}
-            {step === 3 && (
+            {step === 2 && (
               <div>
                 <h2 className="font-serif text-xl mb-6">Order Review</h2>
                 <div className="bg-secondary p-4 mb-4">
@@ -451,7 +389,7 @@ export default function CheckoutPage() {
                 </div>
                 <div className="bg-secondary p-4 mb-6">
                   <p className="text-[10px] uppercase tracking-[0.2em] font-sans font-medium text-muted-foreground mb-2">Payment Method</p>
-                  <p className="text-sm font-sans font-medium">{selectedPayment}</p>
+                  <p className="text-sm font-sans font-medium">{paymentMethods.find(p => p.id === selectedPayment)?.label || selectedPayment}</p>
                 </div>
                 <div className="space-y-3 mb-6">
                   {cart.map((item) => {
@@ -469,7 +407,7 @@ export default function CheckoutPage() {
                   })}
                 </div>
                 <div className="flex gap-3">
-                  <button onClick={() => setStep(2)} className="btn-outline-luxury">Back</button>
+                  <button onClick={() => setStep(1)} className="btn-outline-luxury">Back</button>
                   <button onClick={handlePlaceOrder} disabled={createOrder.isPending} className="btn-luxury flex-1">
                     {createOrder.isPending ? <Loader2 className="h-4 w-4 animate-spin mx-auto" /> : 'Place Order'}
                   </button>
