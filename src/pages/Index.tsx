@@ -5,7 +5,7 @@ import { ProductCard } from '@/components/ProductCard';
 import { useProducts } from '@/hooks/useProducts';
 import { useActiveDiscounts } from '@/hooks/useDiscounts';
 import { motion } from 'framer-motion';
-import { ArrowRight, Tag, Star } from 'lucide-react';
+import { ArrowRight, Tag, Star, ChevronDown } from 'lucide-react';
 import {
   Carousel,
   CarouselContent,
@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 
-const brands = ['Tom Ford', 'Chanel', 'Dior', 'Guerlain', 'Creed', 'YSL'];
+
 
 export default function HomePage() {
   const { data: products = [] } = useProducts();
@@ -69,18 +69,24 @@ export default function HomePage() {
             </motion.p>
           </motion.div>
         </div>
-      </motion.section>
 
-      {/* Brands Ticker */}
-      <section className="py-12 border-y border-border/50 bg-secondary/30">
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="flex flex-wrap items-center justify-center gap-10 md:gap-20 opacity-60 hover:opacity-100 transition-opacity duration-500">
-            {brands.map((b) => (
-              <span key={b} className="text-sm md:text-[15px] tracking-[0.2em] uppercase font-serif text-foreground">{b}</span>
-            ))}
-          </div>
-        </div>
-      </section>
+        {/* Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2, duration: 1 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center cursor-pointer pointer-events-auto opacity-70 hover:opacity-100 transition-opacity"
+          onClick={() => window.scrollTo({ top: window.innerHeight * 0.85, behavior: 'smooth' })}
+        >
+          <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-2 font-sans">Discover</span>
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+          >
+            <ChevronDown className="h-5 w-5 text-muted-foreground" />
+          </motion.div>
+        </motion.div>
+      </motion.section>
 
       {/* Best Sellers Section */}
       {bestSellers.length > 0 && (
