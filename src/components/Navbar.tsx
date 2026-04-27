@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import type { FormEvent } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Search, ShoppingBag, Menu, X } from 'lucide-react';
 import { useStore } from '@/lib/store';
 import { CartDrawer } from './CartDrawer';
 import logo from '@/assets/logo.png';
 import brandLogo from '../../DIAMOND LOGO (1).png';
+import { useProducts } from '@/hooks/useProducts';
 
 const navLinks = [
   { label: 'Shop All', to: '/shop' },
@@ -15,8 +17,35 @@ const navLinks = [
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
   const { cart, setCartOpen } = useStore();
+  const { data: products = [] } = useProducts();
+  const navigate = useNavigate();
   const cartCount = cart.reduce((sum, i) => sum + i.quantity, 0);
+  const normalizedSearch = searchTerm.trim().toLowerCase();
+  const searchResults = normalizedSearch
+    ? products
+        .filter((product) =>
+          [product.name, product.brand, product.gender, product.product_type, product.scent_family]
+            .some((value) => String(value ?? '').toLowerCase().includes(normalizedSearch))
+        )
+        .slice(0, 5)
+    : [];
+
+  const closeSearch = () => {
+    setSearchOpen(false);
+    setSearchTerm('');
+  };
+
+  const handleSearchSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const query = searchTerm.trim();
+    if (!query) return;
+    navigate(`/shop?q=${encodeURIComponent(query)}`);
+    closeSearch();
+    setMobileOpen(false);
+  };
 
   return (
     <>
@@ -63,7 +92,63 @@ export function Navbar() {
 
             {/* Icons */}
             <div className="flex items-center gap-4">
-              <Link to="/shop" className="p-2 hover:text-primary transition-colors"><Search className="h-4 w-4" /></Link>
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => setSearchOpen((open) => !open)}
+                  className="p-2 hover:text-primary transition-colors"
+                  aria-label="Search products"
+                >
+                  <Search className="h-4 w-4" />
+                </button>
+                {searchOpen && (
+                  <div className="absolute right-0 top-full mt-3 w-[min(88vw,360px)] border border-border bg-background shadow-2xl z-50">
+                    <form onSubmit={handleSearchSubmit} className="flex items-center border-b border-border">
+                      <Search className="ml-3 h-4 w-4 text-muted-foreground" />
+                      <input
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        autoFocus
+                        placeholder="Search perfume, brand, type..."
+                        className="flex-1 bg-transparent px-3 py-3 text-sm font-sans outline-none"
+                      />
+                      <button type="button" onClick={closeSearch} className="p-3 text-muted-foreground hover:text-foreground">
+                        <X className="h-4 w-4" />
+                      </button>
+                    </form>
+                    <div className="max-h-80 overflow-y-auto">
+                      {normalizedSearch && searchResults.length === 0 && (
+                        <p className="px-4 py-4 text-xs font-sans text-muted-foreground">No matching products.</p>
+                      )}
+                      {searchResults.map((product) => (
+                        <Link
+                          key={product.id}
+                          to={`/product/${product.id}`}
+                          onClick={closeSearch}
+                          className="block border-b border-border px-4 py-3 last:border-b-0 hover:bg-secondary transition-colors"
+                        >
+                          <p className="text-sm font-serif">{product.name}</p>
+                          <p className="mt-0.5 text-[10px] uppercase tracking-[0.15em] font-sans text-muted-foreground">
+                            {product.brand} - {product.product_type}
+                          </p>
+                        </Link>
+                      ))}
+                    </div>
+                    {normalizedSearch && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          navigate(`/shop?q=${encodeURIComponent(searchTerm.trim())}`);
+                          closeSearch();
+                        }}
+                        className="w-full border-t border-border px-4 py-3 text-left text-xs uppercase tracking-[0.18em] font-sans text-primary hover:bg-secondary"
+                      >
+                        View all results for "{searchTerm.trim()}"
+                      </button>
+                    )}
+                  </div>
+                )}
+              </div>
               <button onClick={() => setCartOpen(true)} className="p-2 hover:text-primary transition-colors relative">
                 <ShoppingBag className="h-4 w-4" />
                 {cartCount > 0 && (

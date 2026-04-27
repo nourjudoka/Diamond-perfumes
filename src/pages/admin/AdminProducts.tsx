@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { AdminLayout } from '@/components/AdminLayout';
 import { useProducts, useAddProduct, useDeleteProduct, useUpdateProduct } from '@/hooks/useProducts';
-import { Plus, Trash2, Percent, Loader2, Pencil, X } from 'lucide-react';
+import { Plus, Trash2, Percent, Loader2, Pencil, X, Search } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { supabase } from '@/integrations/supabase/client';
 
@@ -68,6 +68,28 @@ export default function AdminProducts() {
   const [sizes, setSizes] = useState<SizeEntry[]>([{ label: '100ml', price: '' }]);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filteredProducts = useMemo(() => {
+    const normalizedQuery = searchQuery.trim().toLowerCase();
+    if (!normalizedQuery) return products;
+
+    return products.filter((p) => {
+      const pSizes = Array.isArray(p.sizes) ? (p.sizes as unknown as { label: string; price: number }[]) : [];
+      const searchableText = [
+        p.name,
+        p.brand,
+        p.product_type,
+        p.gender,
+        p.scent_family,
+        p.stock,
+        p.price,
+        ...pSizes.flatMap((size) => [size.label, size.price]),
+      ].join(' ').toLowerCase();
+
+      return searchableText.includes(normalizedQuery);
+    });
+  }, [products, searchQuery]);
 
   const openAdd = () => {
     setEditId(null);
@@ -159,6 +181,31 @@ export default function AdminProducts() {
         </button>
       </div>
 
+      <div className="mb-4 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
+        <div className="relative w-full sm:max-w-md">
+          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <input
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search products by name, brand, type, size..."
+            className="w-full border border-border bg-background pl-10 pr-9 py-3 text-sm font-sans focus:outline-none focus:border-primary transition-colors"
+          />
+          {searchQuery && (
+            <button
+              type="button"
+              onClick={() => setSearchQuery('')}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+              aria-label="Clear product search"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          )}
+        </div>
+        <p className="text-xs font-sans text-muted-foreground">
+          Showing {filteredProducts.length} of {products.length} products
+        </p>
+      </div>
+
       <div className="bg-background border border-border overflow-x-auto">
         <table className="w-full">
           <thead>
@@ -169,7 +216,7 @@ export default function AdminProducts() {
             </tr>
           </thead>
           <tbody>
-            {products.map((p) => {
+            {filteredProducts.map((p) => {
               const pSizes = Array.isArray(p.sizes) ? (p.sizes as unknown as { label: string; price: number }[]) : [];
               const minPrice = pSizes.length > 0 ? Math.min(...pSizes.map(s => s.price)) : p.price;
               return (
@@ -234,6 +281,13 @@ export default function AdminProducts() {
                 </tr>
               );
             })}
+            {filteredProducts.length === 0 && (
+              <tr>
+                <td colSpan={10} className="px-6 py-10 text-center text-sm font-sans text-muted-foreground">
+                  No products match "{searchQuery}".
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

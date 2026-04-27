@@ -14,16 +14,60 @@ type ProductType = 'Master Box' | 'Tester';
 export default function ShopPage() {
   const { data: products = [], isLoading } = useProducts();
   const { data: storeSettings } = useStoreSettings();
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [selectedGender, setSelectedGender] = useState<Gender | null>(searchParams.get('gender') as Gender | null);
   const [selectedType, setSelectedType] = useState<ProductType | null>(searchParams.get('type') as ProductType | null);
   const [showBestSellersOnly, setShowBestSellersOnly] = useState(searchParams.get('best_sellers') === 'true');
+  const [searchQuery, setSearchQuery] = useState(searchParams.get('q') ?? '');
 
   useEffect(() => {
     setSelectedGender(searchParams.get('gender') as Gender | null);
     setSelectedType(searchParams.get('type') as ProductType | null);
     setShowBestSellersOnly(searchParams.get('best_sellers') === 'true');
+    setSearchQuery(searchParams.get('q') ?? '');
   }, [searchParams]);
+
+  const updateSearchParams = (updates: { gender?: Gender | null; type?: ProductType | null; bestSellers?: boolean }) => {
+    const next = new URLSearchParams(searchParams);
+
+    if ('gender' in updates) {
+      updates.gender ? next.set('gender', updates.gender) : next.delete('gender');
+    }
+    if ('type' in updates) {
+      updates.type ? next.set('type', updates.type) : next.delete('type');
+    }
+    if ('bestSellers' in updates) {
+      updates.bestSellers ? next.set('best_sellers', 'true') : next.delete('best_sellers');
+    }
+
+    setSearchParams(next);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleGenderChange = (gender: Gender) => {
+    const nextGender = selectedGender === gender ? null : gender;
+    setSelectedGender(nextGender);
+    updateSearchParams({ gender: nextGender });
+  };
+
+  const handleTypeChange = (type: ProductType) => {
+    const nextType = selectedType === type ? null : type;
+    setSelectedType(nextType);
+    updateSearchParams({ type: nextType });
+  };
+
+  const handleBestSellersChange = (checked: boolean) => {
+    setShowBestSellersOnly(checked);
+    updateSearchParams({ bestSellers: checked });
+  };
+
+  const clearFilters = () => {
+    setSelectedGender(null);
+    setSelectedType(null);
+    setShowBestSellersOnly(false);
+    setSearchParams(new URLSearchParams());
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const filtered = useMemo(() => {
     return products.filter((p) => {
@@ -39,9 +83,21 @@ export default function ShopPage() {
       if (showBestSellersOnly && !p.is_best_seller) {
         return false;
       }
+      const normalizedQuery = searchQuery.trim().toLowerCase();
+      if (normalizedQuery) {
+        const searchableText = [
+          p.name,
+          p.brand,
+          p.gender,
+          p.product_type,
+          p.scent_family,
+          p.description,
+        ].join(' ').toLowerCase();
+        if (!searchableText.includes(normalizedQuery)) return false;
+      }
       return true;
     });
-  }, [products, selectedGender, selectedType, showBestSellersOnly]);
+  }, [products, selectedGender, selectedType, showBestSellersOnly, searchQuery]);
 
   if (isLoading) {
     return (
@@ -70,7 +126,9 @@ export default function ShopPage() {
           <h1 className="section-heading mb-2">
             {selectedType === 'Tester' ? 'Tester Collection' : selectedType === 'Master Box' ? 'Master Boxes' : 'All Fragrances'}
           </h1>
-          <p className="text-sm text-muted-foreground font-sans">{filtered.length} products</p>
+          <p className="text-sm text-muted-foreground font-sans">
+            {filtered.length} products{searchQuery ? ` matching "${searchQuery}"` : ''}
+          </p>
         </div>
 
         {isPromoEnabled && <PromoDealShowcase activeType={selectedType} />}
@@ -86,7 +144,7 @@ export default function ShopPage() {
                 {(['Men', 'Women', 'Unisex'] as Gender[]).map((g) => (
                   <button
                     key={g}
-                    onClick={() => setSelectedGender(selectedGender === g ? null : g)}
+                    onClick={() => handleGenderChange(g)}
                     className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs font-sans text-left transition-colors ${
                       selectedGender === g
                         ? 'bg-primary text-primary-foreground'
@@ -112,7 +170,7 @@ export default function ShopPage() {
                     <input
                       type="checkbox"
                       checked={selectedType === t}
-                      onChange={() => setSelectedType(selectedType === t ? null : t)}
+                      onChange={() => handleTypeChange(t)}
                       className="accent-primary w-3.5 h-3.5 cursor-pointer"
                     />
                     <span className={selectedType === t ? 'text-foreground font-medium' : 'text-muted-foreground'}>
@@ -131,7 +189,7 @@ export default function ShopPage() {
                     <input
                       type="checkbox"
                       checked={showBestSellersOnly}
-                      onChange={(e) => setShowBestSellersOnly(e.target.checked)}
+                      onChange={(e) => handleBestSellersChange(e.target.checked)}
                       className="accent-primary w-3.5 h-3.5 cursor-pointer"
                     />
                     <span className={showBestSellersOnly ? 'text-primary font-medium flex items-center gap-1.5' : 'text-muted-foreground flex items-center gap-1.5'}>
@@ -141,9 +199,9 @@ export default function ShopPage() {
               </div>
             </div>
 
-            {(selectedGender || selectedType || showBestSellersOnly) && (
+            {(selectedGender || selectedType || showBestSellersOnly || searchQuery) && (
               <button
-                onClick={() => { setSelectedGender(null); setSelectedType(null); setShowBestSellersOnly(false); }}
+                onClick={clearFilters}
                 className="text-[10px] text-muted-foreground hover:text-foreground font-sans underline underline-offset-2 transition-colors"
               >
                 Clear filters
@@ -154,7 +212,7 @@ export default function ShopPage() {
           {/* Mobile filter pills */}
           <div className="md:hidden w-full mb-4 flex flex-wrap gap-2">
             <button
-                onClick={() => setShowBestSellersOnly(!showBestSellersOnly)}
+                onClick={() => handleBestSellersChange(!showBestSellersOnly)}
                 className={`px-3 py-1.5 text-xs font-sans border transition-colors flex items-center gap-1 ${
                   showBestSellersOnly ? 'bg-primary text-primary-foreground border-primary' : 'border-border text-muted-foreground'
                 }`}
@@ -164,7 +222,7 @@ export default function ShopPage() {
             {(['Men', 'Women', 'Unisex'] as Gender[]).map((g) => (
               <button
                 key={g}
-                onClick={() => setSelectedGender(selectedGender === g ? null : g)}
+                onClick={() => handleGenderChange(g)}
                 className={`px-3 py-1.5 text-xs font-sans border transition-colors ${
                   selectedGender === g ? 'bg-primary text-primary-foreground border-primary' : 'border-border text-muted-foreground'
                 }`}
@@ -175,7 +233,7 @@ export default function ShopPage() {
             {(['Master Box', 'Tester'] as ProductType[]).map((t) => (
               <button
                 key={t}
-                onClick={() => setSelectedType(selectedType === t ? null : t)}
+                onClick={() => handleTypeChange(t)}
                 className={`px-3 py-1.5 text-xs font-sans border transition-colors ${
                   selectedType === t ? 'bg-primary text-primary-foreground border-primary' : 'border-border text-muted-foreground'
                 }`}
@@ -191,7 +249,7 @@ export default function ShopPage() {
               <div className="text-center py-20">
                 <p className="text-muted-foreground font-sans text-sm">No products match your selection.</p>
                 <button
-                  onClick={() => { setSelectedGender(null); setSelectedType(null); setShowBestSellersOnly(false); }}
+                  onClick={clearFilters}
                   className="mt-4 text-xs underline font-sans"
                 >
                   Clear filters
