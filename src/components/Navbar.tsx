@@ -9,7 +9,7 @@ import brandLogo from '../../DIAMOND LOGO (1).png';
 const navLinks = [
   { label: 'Shop All', to: '/shop' },
   { label: 'Master Box', to: '/shop?type=Master%20Box' },
-  { label: 'Tester Selection', to: '/shop?type=Tester' },
+  { label: 'Tester Collection', to: '/shop?type=Tester' },
   { label: 'Best Sellers', to: '/shop?best_sellers=true' },
 ];
 

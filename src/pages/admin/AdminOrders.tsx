@@ -95,6 +95,7 @@ export default function AdminOrders() {
       'Subtotal (EGP)': Number(o.subtotal),
       'Shipping (EGP)': Number(o.shipping_cost),
       'Discount (EGP)': Number(o.discount_amount),
+      'Buy 2 Get 1 Discount (EGP)': Number(o.promo_buy2get1_discount_amount ?? 0),
       'Total (EGP)': Number(o.total),
       'Discount Code': o.discount_code || '',
       'Admin Notes': o.admin_notes || '',
@@ -309,6 +310,11 @@ export default function AdminOrders() {
                   <p className="text-lg font-serif">EGP {Number(viewOrder.total).toLocaleString()}</p>
                   {viewOrder.discount_amount > 0 && (
                     <p className="text-[10px] text-primary font-sans">-EGP {viewOrder.discount_amount} discount</p>
+                  )}
+                  {(viewOrder.promo_buy2get1_discount_amount ?? 0) > 0 && (
+                    <p className="text-[10px] text-[#D4AF37] font-sans">
+                      -EGP {Number(viewOrder.promo_buy2get1_discount_amount).toLocaleString()} buy 2 get 1
+                    </p>
                   )}
                   {viewOrder.discount_code && (
                     <p className="text-[10px] text-primary font-sans mt-1">Promo code used: {viewOrder.discount_code}</p>

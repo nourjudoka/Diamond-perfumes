@@ -7,9 +7,10 @@ import { useValidateDiscount } from '@/hooks/useDiscounts';
 import { useGovernorateShippingRules, useStoreSettings } from '@/hooks/useStoreSettings';
 import { useToast } from '@/hooks/use-toast';
 import { Link } from 'react-router-dom';
-import { Check, Smartphone, Wallet, Banknote, Copy, CheckCheck, Minus, Plus, X, ShoppingBag, Tag, Loader2 } from 'lucide-react';
+import { Check, Smartphone, Wallet, Banknote, Copy, CheckCheck, X, Tag, Loader2, Gift } from 'lucide-react';
 import type { Database } from '@/integrations/supabase/types';
 import { EGYPT_GOVERNORATES } from '@/constants/egyptGovernorates';
+import { calcBuy2Get1Free, promoBreakdown } from '@/lib/promoDeals';
 
 type PaymentMethod = Database['public']['Enums']['payment_method'];
 
@@ -179,13 +180,16 @@ export default function CheckoutPage() {
       ? 0
       : Number(storeSettings?.shipping_fee ?? 15);
   const selectedArrivalEta = selectedGovernorateRule?.arrival_eta || storeSettings?.delivery_eta || '3-5 business days';
+  const isPromoEnabled = storeSettings?.promo_buy2get1_enabled ?? true;
+  const promoDealSaving = isPromoEnabled ? calcBuy2Get1Free(cart) : 0;
+  const promoItems = isPromoEnabled ? promoBreakdown(cart) : [];
 
   let discountSaving = 0;
   if (appliedDiscount) {
     if (appliedDiscount.percent > 0) discountSaving = subtotal * (appliedDiscount.percent / 100);
     if (appliedDiscount.amount > 0) discountSaving += appliedDiscount.amount;
   }
-  const total = Math.max(0, subtotal + shippingCost - discountSaving);
+  const total = Math.max(0, subtotal + shippingCost - promoDealSaving - discountSaving);
 
   const validateShipping = () => {
     const requiredFields: Array<[string, string]> = [
@@ -253,6 +257,7 @@ export default function CheckoutPage() {
           subtotal,
           shipping_cost: shippingCost,
           discount_amount: discountSaving,
+          promo_buy2get1_discount_amount: promoDealSaving,
           total,
           discount_code: appliedDiscount?.code || null,
         },
@@ -405,6 +410,18 @@ export default function CheckoutPage() {
                       </div>
                     );
                   })}
+                  {promoItems.map((p) => (
+                    <div key={`promo-${p.type}`} className="flex justify-between items-center py-3 border-b border-[#D4AF37]/20 bg-[#D4AF37]/5 px-3">
+                      <div className="flex items-center gap-2">
+                        <Gift className="h-3.5 w-3.5 text-[#D4AF37]" />
+                        <div>
+                          <p className="text-xs font-sans text-[#D4AF37] font-medium">Buy 2 Get 1 Free · {p.type}</p>
+                          <p className="text-[10px] text-muted-foreground font-sans">{p.freeCount} item{p.freeCount > 1 ? 's' : ''} free (lowest priced)</p>
+                        </div>
+                      </div>
+                      <span className="text-sm font-sans text-[#D4AF37]">-EGP {p.saving.toFixed(0)}</span>
+                    </div>
+                  ))}
                 </div>
                 <div className="flex gap-3">
                   <button onClick={() => setStep(1)} className="btn-outline-luxury">Back</button>
@@ -439,6 +456,22 @@ export default function CheckoutPage() {
                 <span className="text-muted-foreground">Estimated arrival</span>
                 <span>{selectedArrivalEta}</span>
               </div>
+
+              {promoItems.length > 0 && (
+                <div className="border-t border-border pt-3 space-y-1.5">
+                  {promoItems.map((p) => (
+                    <div key={p.type} className="flex justify-between items-center">
+                      <div className="flex items-center gap-1.5">
+                        <Gift className="h-3 w-3 text-[#D4AF37]" />
+                        <span className="text-[10px] text-[#D4AF37] font-sans font-medium">
+                          Buy 2 Get 1 Free - {p.type}
+                        </span>
+                      </div>
+                      <span className="text-xs text-[#D4AF37] font-medium">-EGP {p.saving.toFixed(0)}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
 
               {/* Discount code */}
               {!appliedDiscount ? (

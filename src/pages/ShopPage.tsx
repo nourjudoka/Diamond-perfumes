@@ -3,14 +3,17 @@ import { useProducts } from '@/hooks/useProducts';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { ProductCard } from '@/components/ProductCard';
+import { PromoDealShowcase, PromoStrip } from '@/components/Buy2Get1Promo';
 import { Loader2 } from 'lucide-react';
 import { useSearchParams } from 'react-router-dom';
+import { useStoreSettings } from '@/hooks/useStoreSettings';
 
 type Gender = 'Men' | 'Women' | 'Unisex';
 type ProductType = 'Master Box' | 'Tester';
 
 export default function ShopPage() {
   const { data: products = [], isLoading } = useProducts();
+  const { data: storeSettings } = useStoreSettings();
   const [searchParams] = useSearchParams();
   const [selectedGender, setSelectedGender] = useState<Gender | null>(searchParams.get('gender') as Gender | null);
   const [selectedType, setSelectedType] = useState<ProductType | null>(searchParams.get('type') as ProductType | null);
@@ -30,7 +33,7 @@ export default function ShopPage() {
         if (selectedGender === 'Women' && p.gender !== 'Women' && p.gender !== 'Unisex') return false;
       }
       if (selectedType) {
-        const pt = (p as unknown as { product_type: string }).product_type ?? 'Master Box';
+        const pt = p.product_type ?? 'Master Box';
         if (pt !== selectedType) return false;
       }
       if (showBestSellersOnly && !p.is_best_seller) {
@@ -52,14 +55,25 @@ export default function ShopPage() {
     );
   }
 
+  const isPromoEnabled = storeSettings?.promo_buy2get1_enabled ?? true;
+
   return (
     <div className="min-h-screen">
       <Navbar />
+
+      {isPromoEnabled && (
+        <PromoStrip />
+      )}
+
       <div className="container mx-auto px-4 md:px-8 py-10">
         <div className="mb-10">
-          <h1 className="section-heading mb-2">All Fragrances</h1>
+          <h1 className="section-heading mb-2">
+            {selectedType === 'Tester' ? 'Tester Collection' : selectedType === 'Master Box' ? 'Master Boxes' : 'All Fragrances'}
+          </h1>
           <p className="text-sm text-muted-foreground font-sans">{filtered.length} products</p>
         </div>
+
+        {isPromoEnabled && <PromoDealShowcase activeType={selectedType} />}
 
         <div className="flex flex-col md:flex-row gap-8 md:gap-10">
           {/* Sidebar */}

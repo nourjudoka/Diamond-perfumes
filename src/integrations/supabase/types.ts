@@ -149,6 +149,7 @@ export type Database = {
           payment_method: Database["public"]["Enums"]["payment_method"]
           payment_screenshot: string | null
           phone: string
+          promo_buy2get1_discount_amount: number
           shipping_cost: number
           status: Database["public"]["Enums"]["order_status"]
           subtotal: number
@@ -169,6 +170,7 @@ export type Database = {
           payment_method: Database["public"]["Enums"]["payment_method"]
           payment_screenshot?: string | null
           phone: string
+          promo_buy2get1_discount_amount?: number
           shipping_cost?: number
           status?: Database["public"]["Enums"]["order_status"]
           subtotal: number
@@ -189,6 +191,7 @@ export type Database = {
           payment_method?: Database["public"]["Enums"]["payment_method"]
           payment_screenshot?: string | null
           phone?: string
+          promo_buy2get1_discount_amount?: number
           shipping_cost?: number
           status?: Database["public"]["Enums"]["order_status"]
           subtotal?: number
@@ -259,6 +262,7 @@ export type Database = {
           created_at: string
           delivery_eta: string
           id: number
+          promo_buy2get1_enabled: boolean
           shipping_fee: number
           shipping_is_free: boolean
           updated_at: string
@@ -267,6 +271,7 @@ export type Database = {
           created_at?: string
           delivery_eta?: string
           id?: number
+          promo_buy2get1_enabled?: boolean
           shipping_fee?: number
           shipping_is_free?: boolean
           updated_at?: string
@@ -275,6 +280,7 @@ export type Database = {
           created_at?: string
           delivery_eta?: string
           id?: number
+          promo_buy2get1_enabled?: boolean
           shipping_fee?: number
           shipping_is_free?: boolean
           updated_at?: string

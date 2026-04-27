@@ -1,11 +1,23 @@
 import { Link } from 'react-router-dom';
-import { Minus, Plus, X } from 'lucide-react';
+import { Gift, Minus, Plus, X } from 'lucide-react';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { useStore } from '@/lib/store';
+import { useStoreSettings } from '@/hooks/useStoreSettings';
+import { calcBuy2Get1Free, promoBreakdown } from '@/lib/promoDeals';
 
 export function CartDrawer() {
   const { cart, cartOpen, setCartOpen, removeFromCart, updateQuantity } = useStore();
-  const subtotal = cart.reduce((sum, i) => sum + i.product.price * i.quantity, 0);
+  const { data: storeSettings } = useStoreSettings();
+  const isPromoEnabled = storeSettings?.promo_buy2get1_enabled ?? true;
+  const subtotal = cart.reduce((sum, i) => {
+    const effectivePrice = i.product.discount_percent && i.product.discount_percent > 0
+      ? i.product.price * (1 - i.product.discount_percent / 100)
+      : i.product.price;
+    return sum + effectivePrice * i.quantity;
+  }, 0);
+  const promoDealSaving = isPromoEnabled ? calcBuy2Get1Free(cart) : 0;
+  const promoItems = isPromoEnabled ? promoBreakdown(cart) : [];
+  const total = Math.max(0, subtotal - promoDealSaving);
 
   return (
     <Sheet open={cartOpen} onOpenChange={setCartOpen}>
@@ -49,10 +61,31 @@ export function CartDrawer() {
                 </div>
               ))}
             </div>
-            <div className="border-t border-border pt-4 space-y-4">
+            <div className="border-t border-border pt-4 space-y-3">
+              {promoItems.length > 0 && (
+                <div className="bg-[#D4AF37]/10 border border-[#D4AF37]/20 px-3 py-2 space-y-1">
+                  {promoItems.map((p) => (
+                    <div key={p.type} className="flex items-center justify-between">
+                      <div className="flex items-center gap-1.5">
+                        <Gift className="h-3 w-3 text-[#D4AF37]" />
+                        <span className="text-[10px] uppercase tracking-[0.15em] font-sans text-[#D4AF37]">
+                          Buy 2 Get 1 Free - {p.type}
+                        </span>
+                      </div>
+                      <span className="text-[10px] font-sans text-[#D4AF37] font-medium">-EGP {p.saving.toFixed(0)}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {promoDealSaving > 0 && (
+                <div className="flex justify-between items-center text-xs font-sans text-muted-foreground">
+                  <span>Subtotal</span>
+                  <span className="line-through">EGP {subtotal.toLocaleString()}</span>
+                </div>
+              )}
               <div className="flex justify-between items-center">
-                <span className="text-sm uppercase tracking-wider font-sans">Subtotal</span>
-                <span className="text-lg font-serif text-primary">EGP {subtotal.toLocaleString()}</span>
+                <span className="text-sm uppercase tracking-wider font-sans">Total</span>
+                <span className="text-lg font-serif text-primary">EGP {total.toLocaleString()}</span>
               </div>
               <Link
                 to="/checkout"

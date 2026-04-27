@@ -8,6 +8,8 @@ const STORE_SETTINGS_ID = 1;
 export function useStoreSettings() {
   return useQuery({
     queryKey: ['store_settings'],
+    refetchInterval: 5000,
+    refetchOnWindowFocus: true,
     queryFn: async () => {
       const { data, error } = await supabase
         .from('store_settings')
@@ -22,6 +24,7 @@ export function useStoreSettings() {
           shipping_is_free: false,
           shipping_fee: 15,
           delivery_eta: '3-5 business days',
+          promo_buy2get1_enabled: true,
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString(),
         }
@@ -39,6 +42,7 @@ export function useUpsertStoreSettings() {
         shipping_is_free: updates.shipping_is_free ?? false,
         shipping_fee: updates.shipping_fee ?? 15,
         delivery_eta: updates.delivery_eta ?? '3-5 business days',
+        promo_buy2get1_enabled: updates.promo_buy2get1_enabled ?? true,
         updated_at: new Date().toISOString(),
       };
 
@@ -51,7 +55,10 @@ export function useUpsertStoreSettings() {
       if (error) throw error;
       return data;
     },
-    onSuccess: () => qc.invalidateQueries({ queryKey: ['store_settings'] }),
+    onSuccess: (data) => {
+      qc.setQueryData(['store_settings'], data);
+      qc.invalidateQueries({ queryKey: ['store_settings'] });
+    },
   });
 }
 

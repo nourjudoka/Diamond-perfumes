@@ -13,6 +13,9 @@ const EMPTY_FORM = {
   productType: 'Master Box', isBestSeller: false,
 };
 
+type ProductForm = typeof EMPTY_FORM;
+type ProductFormTextKey = Extract<keyof ProductForm, 'name' | 'brand' | 'stock' | 'discount'>;
+
 const EMPTY_SIZE: SizeEntry = { label: '', price: '' };
 
 function SizeBuilder({ sizes, onChange }: { sizes: SizeEntry[]; onChange: (s: SizeEntry[]) => void }) {
@@ -80,7 +83,7 @@ export default function AdminProducts() {
       name: p.name, brand: p.brand, stock: String(p.stock ?? ''),
       description: p.description ?? '', gender: p.gender ?? 'Unisex',
       scentFamily: p.scent_family ?? 'Woody', discount: String(p.discount_percent ?? 0), image: p.image ?? '',
-      productType: (p as unknown as { product_type: string }).product_type ?? 'Master Box',
+      productType: p.product_type ?? 'Master Box',
       isBestSeller: p.is_best_seller ?? false,
     });
     const existingSizes = Array.isArray(p.sizes)
@@ -178,10 +181,10 @@ export default function AdminProducts() {
                   <td className="px-6 py-4 text-sm font-sans text-muted-foreground">{p.brand}</td>
                   <td className="px-6 py-4">
                     <select
-                      value={(p as unknown as { product_type: string }).product_type ?? 'Master Box'}
+                      value={p.product_type ?? 'Master Box'}
                       onChange={(e) => updateProduct.mutate({ id: p.id, updates: { product_type: e.target.value } })}
                       className={`text-[10px] font-sans px-2 py-1 border focus:outline-none cursor-pointer ${
-                        (p as unknown as { product_type: string }).product_type === 'Tester'
+                        p.product_type === 'Tester'
                           ? 'bg-amber-900/30 text-amber-400 border-amber-800'
                           : 'bg-green-900/30 text-green-400 border-green-800'
                       }`}>
@@ -241,15 +244,15 @@ export default function AdminProducts() {
             <DialogTitle className="font-serif text-xl">{editId ? 'Edit Product' : 'Add New Product'}</DialogTitle>
           </DialogHeader>
           <div className="space-y-4 mt-4">
-            {[
+            {([
               { label: 'Product Name', key: 'name' },
               { label: 'Brand', key: 'brand' },
               { label: 'Stock Quantity', key: 'stock', type: 'number' },
               { label: 'Discount %', key: 'discount', type: 'number' },
-            ].map((field) => (
+            ] satisfies Array<{ label: string; key: ProductFormTextKey; type?: string }>).map((field) => (
               <div key={field.key}>
                 <label className="text-[10px] uppercase tracking-[0.2em] font-sans font-medium block mb-1.5">{field.label}</label>
-                <input type={field.type || 'text'} value={(form as any)[field.key]}
+                <input type={field.type || 'text'} value={form[field.key]}
                   onChange={(e) => setForm({ ...form, [field.key]: e.target.value })}
                   className="w-full border border-border px-4 py-3 text-sm font-sans focus:outline-none focus:border-foreground transition-colors bg-background" />
               </div>

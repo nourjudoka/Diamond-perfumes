@@ -2,10 +2,12 @@ import { Link } from 'react-router-dom';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { ProductCard } from '@/components/ProductCard';
+import { PromoStrip } from '@/components/Buy2Get1Promo';
 import { useProducts } from '@/hooks/useProducts';
 import { useActiveDiscounts } from '@/hooks/useDiscounts';
+import { useStoreSettings } from '@/hooks/useStoreSettings';
 import { motion } from 'framer-motion';
-import { ArrowRight, Tag, Star, ChevronDown } from 'lucide-react';
+import { ArrowRight, Tag, Star, ChevronDown, FlaskConical } from 'lucide-react';
 import {
   Carousel,
   CarouselContent,
@@ -20,9 +22,11 @@ import Autoplay from "embla-carousel-autoplay";
 export default function HomePage() {
   const { data: products = [] } = useProducts();
   const { data: discounts = [] } = useActiveDiscounts();
+  const { data: storeSettings } = useStoreSettings();
   const websiteOffers = discounts.filter((d) => !d.code);
   const bestSellers = products.filter(p => p.is_best_seller);
-  const featured = products.filter(p => !p.is_best_seller).slice(0, 4);
+  const testers = products.filter(p => p.product_type === 'Tester');
+  const isPromoEnabled = storeSettings?.promo_buy2get1_enabled ?? true;
 
   return (
     <div className="min-h-screen bg-background">
@@ -39,6 +43,10 @@ export default function HomePage() {
             ))}
           </div>
         </div>
+      )}
+
+      {isPromoEnabled && (
+        <PromoStrip />
       )}
 
       {/* Ultra-Luxury Hero Section */}
@@ -122,6 +130,53 @@ export default function HomePage() {
                  <CarouselNext className="right-0 xl:-right-12 border-primary/20 hover:bg-primary/20 hover:text-primary transition-colors" />
               </div>
             </Carousel>
+          </div>
+        </section>
+      )}
+
+      {/* Tester Collection Section */}
+      {testers.length > 0 && (
+        <section className="py-24 md:py-32 bg-black border-t border-white/10">
+          <div className="container mx-auto px-4 md:px-8">
+            <div className="flex flex-col items-center justify-center mb-16 text-center">
+              <FlaskConical className="h-6 w-6 text-[#D4AF37] mb-4" />
+              <h2 className="font-serif text-4xl md:text-5xl mb-4 text-white tracking-widest uppercase">Tester Collection</h2>
+              <p className="text-sm tracking-[0.15em] text-white/50 uppercase font-sans">Authentic Fragrances · Unboxed · Full Size</p>
+            </div>
+            <Carousel
+              plugins={[
+                Autoplay({
+                  delay: 2000,
+                  stopOnInteraction: false,
+                }),
+              ]}
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              className="w-full max-w-[100vw]"
+            >
+              <CarouselContent className="-ml-4 md:-ml-8">
+                {testers.map((product) => (
+                  <CarouselItem key={product.id} className="pl-4 md:pl-8 basis-[85%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+                    <ProductCard product={product} />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <div className="hidden md:block">
+                <CarouselPrevious className="left-0 xl:-left-12 border-[#D4AF37]/30 hover:bg-[#D4AF37]/20 hover:text-[#D4AF37] transition-colors" />
+                <CarouselNext className="right-0 xl:-right-12 border-[#D4AF37]/30 hover:bg-[#D4AF37]/20 hover:text-[#D4AF37] transition-colors" />
+              </div>
+            </Carousel>
+            <div className="flex justify-center mt-12">
+              <Link
+                to="/shop?type=Tester"
+                onClick={() => window.scrollTo({ top: 0 })}
+                className="inline-flex items-center gap-3 px-10 py-3 border border-[#D4AF37]/50 text-[#D4AF37] text-xs tracking-[0.2em] uppercase font-sans hover:bg-[#D4AF37]/10 transition-colors"
+              >
+                View All Testers <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
           </div>
         </section>
       )}

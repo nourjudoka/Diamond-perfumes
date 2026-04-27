@@ -19,6 +19,7 @@ export default function AdminSettings() {
   const [shippingIsFree, setShippingIsFree] = useState(false);
   const [shippingFee, setShippingFee] = useState('15');
   const [deliveryEta, setDeliveryEta] = useState('3-5 business days');
+  const [promoBuy2Get1Enabled, setPromoBuy2Get1Enabled] = useState(true);
   const [bulkFee, setBulkFee] = useState('15');
   const [localRules, setLocalRules] = useState<
     Array<{ governorate: string; is_free: boolean; shipping_fee: number; arrival_eta: string }>
@@ -29,6 +30,7 @@ export default function AdminSettings() {
     setShippingIsFree(settings.shipping_is_free);
     setShippingFee(String(settings.shipping_fee ?? 0));
     setDeliveryEta(settings.delivery_eta ?? '3-5 business days');
+    setPromoBuy2Get1Enabled(settings.promo_buy2get1_enabled ?? true);
     setBulkFee(String(settings.shipping_fee ?? 15));
   }, [settings]);
 
@@ -74,6 +76,39 @@ export default function AdminSettings() {
     );
   };
 
+  const handlePromoToggle = async () => {
+    const nextValue = !promoBuy2Get1Enabled;
+    const parsedFee = Number(shippingFee);
+
+    setPromoBuy2Get1Enabled(nextValue);
+    try {
+      await upsertSettings.mutateAsync({
+        shipping_is_free: shippingIsFree,
+        shipping_fee: shippingIsFree
+          ? 0
+          : Number.isFinite(parsedFee) && parsedFee >= 0
+            ? parsedFee
+            : Number(settings?.shipping_fee ?? 15),
+        delivery_eta: deliveryEta.trim() || settings?.delivery_eta || '3-5 business days',
+        promo_buy2get1_enabled: nextValue,
+      });
+
+      toast({
+        title: nextValue ? 'Offer activated' : 'Offer turned off',
+        description: nextValue
+          ? 'Buy 2 Get 1 banners and checkout discount are now active.'
+          : 'Buy 2 Get 1 banners and checkout discount are now disabled.',
+      });
+    } catch (err) {
+      setPromoBuy2Get1Enabled(!nextValue);
+      toast({
+        title: 'Offer update failed',
+        description: err instanceof Error ? err.message : 'Please try again.',
+        variant: 'destructive',
+      });
+    }
+  };
+
   const handleSave = async () => {
     const parsedFee = Number(shippingFee);
     if (!shippingIsFree && (!Number.isFinite(parsedFee) || parsedFee < 0)) {
@@ -100,6 +135,7 @@ export default function AdminSettings() {
         shipping_is_free: shippingIsFree,
         shipping_fee: shippingIsFree ? 0 : parsedFee,
         delivery_eta: deliveryEta.trim() || '3-5 business days',
+        promo_buy2get1_enabled: promoBuy2Get1Enabled,
       }),
       upsertGovernorateRules.mutateAsync(
         localRules.map((rule) => ({
@@ -128,6 +164,30 @@ export default function AdminSettings() {
           </div>
         ) : (
           <div className="space-y-8">
+            <div className="border border-[#D4AF37]/30 bg-[#D4AF37]/5 p-4">
+              <label className="text-[10px] uppercase tracking-[0.2em] font-sans font-medium block mb-3">Buy 2 Get 1 Free Offer</label>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div>
+                  <p className="text-sm font-sans font-medium">Master Box + Tester promo</p>
+                  <p className="text-xs text-muted-foreground font-sans mt-1">
+                    Applies separately per type. For every 3 of the same type, the lowest-priced one is free.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={handlePromoToggle}
+                  disabled={upsertSettings.isPending}
+                  className={`px-5 py-2 text-xs font-sans uppercase tracking-[0.15em] border transition-colors ${
+                    promoBuy2Get1Enabled
+                      ? 'bg-[#D4AF37] text-black border-[#D4AF37]'
+                      : 'border-border text-muted-foreground hover:text-foreground'
+                  } disabled:cursor-not-allowed disabled:opacity-60`}
+                >
+                  {upsertSettings.isPending ? 'Saving...' : promoBuy2Get1Enabled ? 'Offer Active' : 'Offer Off'}
+                </button>
+              </div>
+            </div>
+
             <div>
               <label className="text-[10px] uppercase tracking-[0.2em] font-sans font-medium block mb-2">Default Shipping Mode</label>
               <div className="flex gap-3">
